@@ -1,0 +1,38 @@
+# docker compose up: starts the validation API on http://localhost:58380 (OpenAPI UI at /scalar/v1) and runs a
+# one-shot CLI demo that validates the committed synthetic samples and prints Turkish explanations and fixes.
+name: ubltr-validator
+
+services:
+  api:
+    build: .
+    image: ubltr-validator:local
+    ports:
+      - "58380:8080"
+    environment:
+      ASPNETCORE_ENVIRONMENT: Production
+      Validation__MaxDocumentBytes: "20971520"
+    read_only: true
+    security_opt:
+      - no-new-privileges:true
+    restart: unless-stopped
+
+  cli-demo:
+    build: .
+    image: ubltr-validator:local
+    depends_on:
+      - api
+    # The CLI ships in the same image. It validates one valid and three invalid samples; exit code 1 is expected.
+    entrypoint:
+      - dotnet
+      - /app/cli/ubltr.dll
+      - validate
+      - /samples/valid/temel-satis-try.xml
+      - /samples/invalid/TOT-005.xml
+      - /samples/invalid/PTY-003.xml
+      - /samples/invalid/TAX-009.xml
+      - --today
+      - "2026-11-11"
+    volumes:
+      - ./samples/invoices:/samples:ro
+    read_only: true
+    restart: "no"
