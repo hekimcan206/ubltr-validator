@@ -1,0 +1,12 @@
+[
+  {
+    "ruleId": "XSD-001",
+    "severity": "Error",
+    "line": 21,
+    "column": 4,
+    "messageTr": "'Invoice' içinde beklenmeyen eleman 'cac:Signature'. Bu konumda beklenen: cbc:TaxCurrencyCode, cbc:PricingCurrencyCode, cbc:PaymentCurrencyCode, cbc:PaymentAlternativeCurrencyCode, cbc:AccountingCost, cbc:LineCountNumeric.",
+    "messageEn": "Unexpected element 'cac:Signature' inside 'Invoice'. Expected here: cbc:TaxCurrencyCode, cbc:PricingCurrencyCode, cbc:PaymentCurrencyCode, cbc:PaymentAlternativeCurrencyCode, cbc:AccountingCost, cbc:LineCountNumeric.",
+    "fixTr": "Elemanları UBL-TR şemasındaki sıraya göre dizin; 'cac:Signature' yanlış yerde, eksik bir zorunlu elemandan sonra veya yanlış isim alanında olabilir. Beklenen elemanlardan biri (cbc:TaxCurrencyCode, cbc:PricingCurrencyCode, cbc:PaymentCurrencyCode, cbc:PaymentAlternativeCurrencyCode, cbc:AccountingCost, cbc:LineCountNumeric) eksik olabilir.",
+    "fixEn": "Put the elements in the order the UBL-TR schema defines; 'cac:Signature' may be misplaced, follow a missing mandatory element, or use the wrong namespace. One of the expected elements (cbc:TaxCurrencyCode, cbc:PricingCurrencyCode, cbc:PaymentCurrencyCode, cbc:PaymentAlternativeCurrencyCode, cbc:AccountingCost, cbc:LineCountNumeric) may be missing."
+  }
+]

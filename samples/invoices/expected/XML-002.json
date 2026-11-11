@@ -1,0 +1,12 @@
+[
+  {
+    "ruleId": "XML-002",
+    "severity": "Error",
+    "line": 0,
+    "column": 0,
+    "messageTr": "Belge bir DOCTYPE/DTD bildirimi içeriyor: For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.",
+    "messageEn": "The document contains a DOCTYPE/DTD declaration: For security reasons DTD is prohibited in this XML document. To enable DTD processing set the DtdProcessing property on XmlReaderSettings to Parse and pass the settings into XmlReader.Create method.",
+    "fixTr": "<!DOCTYPE ...> bildirimini ve tanımlı varlıkları kaldırın; özel karakterleri doğrudan UTF-8 olarak yazın.",
+    "fixEn": "Remove the <!DOCTYPE ...> declaration and any entity definitions; write special characters directly as UTF-8."
+  }
+]

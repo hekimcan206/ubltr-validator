@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "PTY-006",
+    "severity": "Error",
+    "line": 67,
+    "column": 6,
+    "path": "/Invoice/cac:AccountingCustomerParty/cac:Party",
+    "messageTr": "Alıcı (AccountingCustomerParty) VKN ile tanımlanmış ama cac:PartyName/cbc:Name yok veya boş.",
+    "messageEn": "Customer (AccountingCustomerParty) is identified by VKN but cac:PartyName/cbc:Name is missing or empty.",
+    "fixTr": "<cac:PartyName><cbc:Name>Unvan</cbc:Name></cac:PartyName> ekleyin.",
+    "fixEn": "Add <cac:PartyName><cbc:Name>Trade name</cbc:Name></cac:PartyName>."
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "DOC-001",
+    "severity": "Error",
+    "line": 2,
+    "column": 2,
+    "path": "/sh:StandardBusinessDocument",
+    "messageTr": "Kök eleman '{http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader}StandardBusinessDocument'; beklenen '{urn:oasis:names:specification:ubl:schema:xsd:Invoice-2}Invoice'. Bu bir StandardBusinessDocument zarfı; içindeki Invoice elemanını ayrı bir dosya olarak doğrulayın.",
+    "messageEn": "Root element is '{http://www.unece.org/cefact/namespaces/StandardBusinessDocumentHeader}StandardBusinessDocument'; expected '{urn:oasis:names:specification:ubl:schema:xsd:Invoice-2}Invoice'. This is a StandardBusinessDocument envelope; validate the Invoice inside it as a separate file.",
+    "fixTr": "Faturayı doğru isim alanıyla (xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\") tek başına doğrulayın.",
+    "fixEn": "Validate the invoice on its own, with the correct namespace (xmlns=\"urn:oasis:names:specification:ubl:schema:xsd:Invoice-2\")."
+  }
+]

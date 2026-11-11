@@ -2,4 +2,7 @@
   <Folder Name="/src/">
     <Project Path="src/UblTr.Validator/UblTr.Validator.csproj" />
   </Folder>
+  <Folder Name="/tools/">
+    <Project Path="tools/UblTr.SampleGen/UblTr.SampleGen.csproj" />
+  </Folder>
 </Solution>

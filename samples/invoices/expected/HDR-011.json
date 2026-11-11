@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-011",
+    "severity": "Warning",
+    "line": 13,
+    "column": 4,
+    "path": "/Invoice/cbc:ID",
+    "messageTr": "cbc:ID yılı 2025, cbc:IssueDate yılı 2026.",
+    "messageEn": "cbc:ID year is 2025, cbc:IssueDate year is 2026.",
+    "fixTr": "Numarayı düzenleme yılının serisinden verin ya da düzenleme tarihini düzeltin.",
+    "fixEn": "Take the number from the issue year's sequence or correct the issue date."
+  }
+]

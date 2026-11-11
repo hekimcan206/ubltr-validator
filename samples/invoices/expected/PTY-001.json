@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "PTY-001",
+    "severity": "Error",
+    "line": 43,
+    "column": 6,
+    "path": "/Invoice/cac:AccountingSupplierParty/cac:Party",
+    "messageTr": "Satıcı (AccountingSupplierParty): VKN veya TCKN yok.",
+    "messageEn": "Supplier (AccountingSupplierParty): no VKN or TCKN.",
+    "fixTr": "Şirketler için <cbc:ID schemeID=\"VKN\">, şahıslar için <cbc:ID schemeID=\"TCKN\"> ekleyin; ikisini birden yazmayın.",
+    "fixEn": "Add <cbc:ID schemeID=\"VKN\"> for companies or <cbc:ID schemeID=\"TCKN\"> for individuals, never both."
+  }
+]

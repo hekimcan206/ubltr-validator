@@ -1,0 +1,35 @@
+[
+  {
+    "ruleId": "TAX-007",
+    "severity": "Error",
+    "line": 97,
+    "column": 10,
+    "path": "/Invoice/cac:TaxTotal/cac:TaxSubtotal[1]/cac:TaxCategory/cbc:TaxExemptionReasonCode",
+    "messageTr": "Muafiyet kodu '301' fatura tipi 'SATIS' ile kullanılamaz. İzin verilen tipler: ISTISNA, IADE, IHRACKAYITLI, SGK, YTBISTISNA, YTBIADE.",
+    "messageEn": "Exemption code '301' cannot be used with invoice type 'SATIS'. Allowed types: ISTISNA, IADE, IHRACKAYITLI, SGK, YTBISTISNA, YTBIADE.",
+    "fixTr": "Fatura tipini ISTISNA, IADE, IHRACKAYITLI, SGK, YTBISTISNA, YTBIADE değerlerinden biri yapın ya da doğru muafiyet kodunu seçin.",
+    "fixEn": "Change the invoice type to one of ISTISNA, IADE, IHRACKAYITLI, SGK, YTBISTISNA, YTBIADE or choose the right exemption code."
+  },
+  {
+    "ruleId": "TAX-007",
+    "severity": "Error",
+    "line": 110,
+    "column": 10,
+    "path": "/Invoice/cac:TaxTotal/cac:TaxSubtotal[2]/cac:TaxCategory/cbc:TaxExemptionReasonCode",
+    "messageTr": "Muafiyet kodu '301' fatura tipi 'SATIS' ile kullanılamaz. İzin verilen tipler: ISTISNA, IADE, IHRACKAYITLI, SGK, YTBISTISNA, YTBIADE.",
+    "messageEn": "Exemption code '301' cannot be used with invoice type 'SATIS'. Allowed types: ISTISNA, IADE, IHRACKAYITLI, SGK, YTBISTISNA, YTBIADE.",
+    "fixTr": "Fatura tipini ISTISNA, IADE, IHRACKAYITLI, SGK, YTBISTISNA, YTBIADE değerlerinden biri yapın ya da doğru muafiyet kodunu seçin.",
+    "fixEn": "Change the invoice type to one of ISTISNA, IADE, IHRACKAYITLI, SGK, YTBISTISNA, YTBIADE or choose the right exemption code."
+  },
+  {
+    "ruleId": "TAX-007",
+    "severity": "Error",
+    "line": 123,
+    "column": 10,
+    "path": "/Invoice/cac:TaxTotal/cac:TaxSubtotal[3]/cac:TaxCategory/cbc:TaxExemptionReasonCode",
+    "messageTr": "Muafiyet kodu '301' fatura tipi 'SATIS' ile kullanılamaz. İzin verilen tipler: ISTISNA, IADE, IHRACKAYITLI, SGK, YTBISTISNA, YTBIADE.",
+    "messageEn": "Exemption code '301' cannot be used with invoice type 'SATIS'. Allowed types: ISTISNA, IADE, IHRACKAYITLI, SGK, YTBISTISNA, YTBIADE.",
+    "fixTr": "Fatura tipini ISTISNA, IADE, IHRACKAYITLI, SGK, YTBISTISNA, YTBIADE değerlerinden biri yapın ya da doğru muafiyet kodunu seçin.",
+    "fixEn": "Change the invoice type to one of ISTISNA, IADE, IHRACKAYITLI, SGK, YTBISTISNA, YTBIADE or choose the right exemption code."
+  }
+]

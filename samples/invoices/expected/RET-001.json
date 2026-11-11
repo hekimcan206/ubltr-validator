@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "RET-001",
+    "severity": "Error",
+    "line": 18,
+    "column": 4,
+    "path": "/Invoice/cbc:InvoiceTypeCode",
+    "messageTr": "Fatura tipi 'IADE' için geçerli iade referansı yok veya hatalı.",
+    "messageEn": "Invoice type 'IADE' has no valid return reference.",
+    "fixTr": "<cac:BillingReference><cac:InvoiceDocumentReference> içine iade edilen faturanın numarasını (cbc:ID), tarihini ve <cbc:DocumentTypeCode>IADE</cbc:DocumentTypeCode> değerini ekleyin.",
+    "fixEn": "Add <cac:BillingReference><cac:InvoiceDocumentReference> with the returned invoice's number (cbc:ID), its date and <cbc:DocumentTypeCode>IADE</cbc:DocumentTypeCode>."
+  }
+]

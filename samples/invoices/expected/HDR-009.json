@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-009",
+    "severity": "Error",
+    "line": 18,
+    "column": 4,
+    "path": "/Invoice/cbc:InvoiceTypeCode",
+    "messageTr": "Fatura tipi 'YTBSATIS' senaryo 'TEMELFATURA' ile kullanılmış; EARSIVFATURA olmalı.",
+    "messageEn": "Invoice type 'YTBSATIS' is used with scenario 'TEMELFATURA'; it requires EARSIVFATURA.",
+    "fixTr": "e-Arşiv için senaryoyu EARSIVFATURA yapın; e-Fatura için YATIRIMTESVIK senaryosu ile SATIS/ISTISNA/IADE/TEVKIFAT tiplerini kullanın.",
+    "fixEn": "For e-Arşiv set the scenario to EARSIVFATURA; for e-Fatura use scenario YATIRIMTESVIK with SATIS/ISTISNA/IADE/TEVKIFAT."
+  }
+]

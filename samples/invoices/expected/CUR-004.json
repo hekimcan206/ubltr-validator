@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "CUR-004",
+    "severity": "Error",
+    "line": 90,
+    "column": 4,
+    "path": "/Invoice/cac:PricingExchangeRate",
+    "messageTr": "Kaynak 'USD', hedef 'EUR'; beklenen kaynak 'USD', hedef 'TRY'.",
+    "messageEn": "Source 'USD', target 'EUR'; expected source 'USD' and target 'TRY'.",
+    "fixTr": "SourceCurrencyCode'u USD, TargetCurrencyCode'u TRY yapın.",
+    "fixEn": "Set SourceCurrencyCode to USD and TargetCurrencyCode to TRY."
+  }
+]

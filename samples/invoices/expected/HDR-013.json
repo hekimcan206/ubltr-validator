@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-013",
+    "severity": "Error",
+    "line": 14,
+    "column": 4,
+    "path": "/Invoice/cbc:CopyIndicator",
+    "messageTr": "cbc:CopyIndicator değeri 'true'; 'false' olmalı.",
+    "messageEn": "cbc:CopyIndicator is 'true'; it must be 'false'.",
+    "fixTr": "<cbc:CopyIndicator>false</cbc:CopyIndicator> yazın.",
+    "fixEn": "Write <cbc:CopyIndicator>false</cbc:CopyIndicator>."
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "TAX-001",
+    "severity": "Error",
+    "line": 91,
+    "column": 6,
+    "path": "/Invoice/cac:TaxTotal/cbc:TaxAmount",
+    "messageTr": "cac:TaxTotal/cbc:TaxAmount 2277.91, alt toplamların toplamı 2274.91.",
+    "messageEn": "cac:TaxTotal/cbc:TaxAmount is 2277.91, the subtotals add up to 2274.91.",
+    "fixTr": "cac:TaxTotal/cbc:TaxAmount değerini 2274.91 yapın.",
+    "fixEn": "Set cac:TaxTotal/cbc:TaxAmount to 2274.91."
+  }
+]

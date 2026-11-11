@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "PTY-002",
+    "severity": "Error",
+    "line": 69,
+    "column": 10,
+    "path": "/Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID",
+    "messageTr": "Alıcı (AccountingCustomerParty) VKN değeri '987654321' 10 haneli bir sayı değil.",
+    "messageEn": "Customer (AccountingCustomerParty) VKN '987654321' is not a 10-digit number.",
+    "fixTr": "VKN'yi boşluk ve ayraç olmadan 10 rakam olarak yazın; 11 haneliyse schemeID'yi TCKN yapın.",
+    "fixEn": "Write the VKN as 10 digits without spaces or separators; if it has 11 digits, set schemeID to TCKN."
+  }
+]

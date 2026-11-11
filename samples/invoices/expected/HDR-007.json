@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-007",
+    "severity": "Error",
+    "line": 18,
+    "column": 4,
+    "path": "/Invoice/cbc:InvoiceTypeCode",
+    "messageTr": "Fatura tipi TEKNOLOJIDESTEK iken senaryo 'TEMELFATURA'; EARSIVFATURA olmalı.",
+    "messageEn": "Invoice type TEKNOLOJIDESTEK uses scenario 'TEMELFATURA'; it must be EARSIVFATURA.",
+    "fixTr": "Senaryoyu EARSIVFATURA yapın.",
+    "fixEn": "Change the scenario to EARSIVFATURA."
+  }
+]

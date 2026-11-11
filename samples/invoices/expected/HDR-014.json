@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-014",
+    "severity": "Warning",
+    "line": 16,
+    "column": 4,
+    "path": "/Invoice/cbc:IssueDate",
+    "messageTr": "cbc:IssueDate '2027-01-05' bugünden (2026-11-11) ileri bir tarih.",
+    "messageEn": "cbc:IssueDate '2027-01-05' is after today (2026-11-11).",
+    "fixTr": "Düzenleme tarihini faturanın gerçekten düzenlendiği gün yapın.",
+    "fixEn": "Set the issue date to the day the invoice is actually issued."
+  }
+]

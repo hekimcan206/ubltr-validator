@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "TAX-009",
+    "severity": "Error",
+    "line": 113,
+    "column": 12,
+    "path": "/Invoice/cac:WithholdingTaxTotal/cac:TaxSubtotal/cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode",
+    "messageTr": "Tevkifat kodu '603' ile oran '%40' geçerli bir kombinasyon değil.",
+    "messageEn": "Withholding code '603' with rate '40%' is not a valid combination.",
+    "fixTr": "GİB tevkifat listesindeki kod/oran çiftini kullanın (ör. 603 + 70, 616 + 50).",
+    "fixEn": "Use a code/rate pair from GIB's withholding list (e.g. 603 + 70, 616 + 50)."
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "TOT-003",
+    "severity": "Error",
+    "line": 128,
+    "column": 6,
+    "path": "/Invoice/cac:LegalMonetaryTotal/cbc:TaxExclusiveAmount",
+    "messageTr": "cbc:TaxExclusiveAmount 12301.33, hesaplanan 12296.33.",
+    "messageEn": "cbc:TaxExclusiveAmount is 12301.33, computed 12296.33.",
+    "fixTr": "cbc:TaxExclusiveAmount değerini 12296.33 yapın.",
+    "fixEn": "Set cbc:TaxExclusiveAmount to 12296.33."
+  }
+]

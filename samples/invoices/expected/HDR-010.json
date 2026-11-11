@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-010",
+    "severity": "Error",
+    "line": 13,
+    "column": 4,
+    "path": "/Invoice/cbc:ID",
+    "messageTr": "cbc:ID 'SY2026000000001' 'ABC2026000000001' biçiminde değil.",
+    "messageEn": "cbc:ID 'SY2026000000001' does not match the 'ABC2026000000001' format.",
+    "fixTr": "Numarayı seri + yıl + 9 haneli sıra olarak yeniden üretin; sıra numarasını soldan sıfırla doldurun (ör. 42 → 000000042).",
+    "fixEn": "Regenerate the number as series + year + 9-digit sequence, left-padding the sequence with zeros (e.g. 42 → 000000042)."
+  }
+]

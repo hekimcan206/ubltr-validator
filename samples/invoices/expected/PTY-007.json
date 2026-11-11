@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "PTY-007",
+    "severity": "Error",
+    "line": 67,
+    "column": 6,
+    "path": "/Invoice/cac:AccountingCustomerParty/cac:Party",
+    "messageTr": "Alıcı (AccountingCustomerParty) TCKN ile tanımlanmış ama cac:Person/cbc:FirstName veya cbc:FamilyName yok ya da boş.",
+    "messageEn": "Customer (AccountingCustomerParty) is identified by TCKN but cac:Person/cbc:FirstName or cbc:FamilyName is missing or empty.",
+    "fixTr": "<cac:Person><cbc:FirstName>Ad</cbc:FirstName><cbc:FamilyName>Soyad</cbc:FamilyName></cac:Person> ekleyin.",
+    "fixEn": "Add <cac:Person><cbc:FirstName>First</cbc:FirstName><cbc:FamilyName>Family</cbc:FamilyName></cac:Person>."
+  }
+]

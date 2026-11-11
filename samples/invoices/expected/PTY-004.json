@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "PTY-004",
+    "severity": "Error",
+    "line": 69,
+    "column": 10,
+    "path": "/Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID",
+    "messageTr": "Alıcı (AccountingCustomerParty) TCKN değeri '1000000014' 0 ile başlamayan 11 haneli bir sayı değil.",
+    "messageEn": "Customer (AccountingCustomerParty) TCKN '1000000014' is not an 11-digit number that does not start with 0.",
+    "fixTr": "TCKN'yi 11 rakam olarak yazın; 10 haneliyse schemeID'yi VKN yapın.",
+    "fixEn": "Write the TCKN as 11 digits; if it has 10 digits, set schemeID to VKN."
+  }
+]

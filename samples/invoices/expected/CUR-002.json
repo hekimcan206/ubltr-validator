@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "CUR-002",
+    "severity": "Error",
+    "line": 20,
+    "column": 4,
+    "path": "/Invoice/cbc:DocumentCurrencyCode",
+    "messageTr": "Belge para birimi USD ama cac:PricingExchangeRate/cbc:CalculationRate yok.",
+    "messageEn": "Document currency is USD but cac:PricingExchangeRate/cbc:CalculationRate is missing.",
+    "fixTr": "<cac:PricingExchangeRate> ekleyin: SourceCurrencyCode USD, TargetCurrencyCode TRY, CalculationRate fatura tarihindeki kur.",
+    "fixEn": "Add <cac:PricingExchangeRate> with SourceCurrencyCode USD, TargetCurrencyCode TRY and CalculationRate set to the rate on the invoice date."
+  }
+]

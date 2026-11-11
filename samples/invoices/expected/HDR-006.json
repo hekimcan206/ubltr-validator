@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-006",
+    "severity": "Error",
+    "line": 18,
+    "column": 4,
+    "path": "/Invoice/cbc:InvoiceTypeCode",
+    "messageTr": "Senaryo 'ENERJI' ile fatura tipi 'SATIS' uyumsuz.",
+    "messageEn": "Scenario 'ENERJI' and invoice type 'SATIS' do not match.",
+    "fixTr": "Şarj hizmeti için ENERJI + SARJ/SARJANLIK kullanın; şarj dışı faturalarda bu ikisini kullanmayın.",
+    "fixEn": "Use ENERJI + SARJ/SARJANLIK for charging services and neither of them otherwise."
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "CUR-005",
+    "severity": "Error",
+    "line": 135,
+    "column": 30,
+    "path": "/Invoice/cac:InvoiceLine[1]/cbc:LineExtensionAmount/@currencyID",
+    "messageTr": "cbc:LineExtensionAmount currencyID 'EUR', belge para birimi 'TRY'.",
+    "messageEn": "cbc:LineExtensionAmount has currencyID 'EUR', document currency is 'TRY'.",
+    "fixTr": "currencyID niteliğini 'TRY' yapın.",
+    "fixEn": "Set the currencyID attribute to 'TRY'."
+  }
+]

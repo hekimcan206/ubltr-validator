@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "TAX-010",
+    "severity": "Error",
+    "line": 99,
+    "column": 12,
+    "path": "/Invoice/cac:TaxTotal/cac:TaxSubtotal[1]/cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode",
+    "messageTr": "Fatura tipi 'SATIS' iken 4171 vergi kodu kullanılmış.",
+    "messageEn": "Tax code 4171 is used on invoice type 'SATIS'.",
+    "fixTr": "Fatura tipini TEVKIFAT yapın ya da 4171 alt toplamını kaldırın.",
+    "fixEn": "Change the invoice type to TEVKIFAT or remove the 4171 subtotal."
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-012",
+    "severity": "Error",
+    "line": 15,
+    "column": 4,
+    "path": "/Invoice/cbc:UUID",
+    "messageTr": "cbc:UUID 'SYN-2026-0001' UUID biçiminde değil.",
+    "messageEn": "cbc:UUID 'SYN-2026-0001' is not a UUID.",
+    "fixTr": "Her fatura için yeni bir UUID üretin (ör. .NET Guid.NewGuid(), PostgreSQL gen_random_uuid()).",
+    "fixEn": "Generate a fresh UUID per invoice (e.g. .NET Guid.NewGuid(), PostgreSQL gen_random_uuid())."
+  }
+]

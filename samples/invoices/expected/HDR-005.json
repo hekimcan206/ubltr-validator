@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-005",
+    "severity": "Error",
+    "line": 18,
+    "column": 4,
+    "path": "/Invoice/cbc:InvoiceTypeCode",
+    "messageTr": "Fatura tipi IADE iken senaryo 'TICARIFATURA' olamaz.",
+    "messageEn": "Invoice type IADE cannot use scenario 'TICARIFATURA'.",
+    "fixTr": "Senaryoyu TEMELFATURA (veya e-Arşiv için EARSIVFATURA) yapın.",
+    "fixEn": "Change the scenario to TEMELFATURA (or EARSIVFATURA for e-Arşiv)."
+  }
+]

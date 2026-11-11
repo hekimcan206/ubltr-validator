@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "TAX-004",
+    "severity": "Error",
+    "line": 92,
+    "column": 6,
+    "path": "/Invoice/cac:TaxTotal/cac:TaxSubtotal[1]",
+    "messageTr": "Vergi 0015 %20: belge alt toplamı 2146.8, satır toplamı 2148.8.",
+    "messageEn": "Tax 0015 at 20%: document subtotal is 2146.8, the lines add up to 2148.8.",
+    "fixTr": "Belge alt toplamını 2148.8 yapın ya da satır vergilerini düzeltin.",
+    "fixEn": "Set the document subtotal to 2148.8 or correct the line taxes."
+  }
+]

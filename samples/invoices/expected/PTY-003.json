@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "PTY-003",
+    "severity": "Error",
+    "line": 69,
+    "column": 10,
+    "path": "/Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID",
+    "messageTr": "Alıcı (AccountingCustomerParty) VKN '9876543218' geçersiz: kontrol hanesi 7 olmalı.",
+    "messageEn": "Customer (AccountingCustomerParty) VKN '9876543218' is invalid: the check digit should be 7.",
+    "fixTr": "VKN'yi vergi levhası veya GİB mükellef sorgusundan doğrulayıp yeniden yazın.",
+    "fixEn": "Re-enter the VKN after checking it against the tax certificate or GIB's taxpayer lookup."
+  }
+]

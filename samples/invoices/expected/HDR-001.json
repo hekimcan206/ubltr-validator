@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-001",
+    "severity": "Error",
+    "line": 10,
+    "column": 4,
+    "path": "/Invoice/cbc:UBLVersionID",
+    "messageTr": "cbc:UBLVersionID değeri '2.0'; '2.1' olmalı.",
+    "messageEn": "cbc:UBLVersionID is '2.0'; it must be '2.1'.",
+    "fixTr": "<cbc:UBLVersionID>2.1</cbc:UBLVersionID> yazın.",
+    "fixEn": "Write <cbc:UBLVersionID>2.1</cbc:UBLVersionID>."
+  }
+]

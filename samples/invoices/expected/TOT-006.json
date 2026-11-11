@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "TOT-006",
+    "severity": "Error",
+    "line": 130,
+    "column": 6,
+    "path": "/Invoice/cac:LegalMonetaryTotal/cbc:PayableAmount",
+    "messageTr": "cac:LegalMonetaryTotal/cbc:PayableAmount değeri '14571.244' en fazla 2 ondalıklı bir tutar değil.",
+    "messageEn": "cac:LegalMonetaryTotal/cbc:PayableAmount value '14571.244' is not an amount with at most 2 decimals.",
+    "fixTr": "Tutarı kuruşa yuvarlayın (ör. 1234.567 → 1234.57) ve ondalık ayıracı olarak nokta kullanın.",
+    "fixEn": "Round the amount to kuruş (e.g. 1234.567 → 1234.57) and use a dot as decimal separator."
+  }
+]

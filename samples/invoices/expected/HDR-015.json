@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-015",
+    "severity": "Error",
+    "line": 21,
+    "column": 4,
+    "path": "/Invoice/cbc:LineCountNumeric",
+    "messageTr": "cbc:LineCountNumeric 5, gerçek satır sayısı 4.",
+    "messageEn": "cbc:LineCountNumeric is 5, actual line count is 4.",
+    "fixTr": "cbc:LineCountNumeric değerini 4 yapın.",
+    "fixEn": "Set cbc:LineCountNumeric to 4."
+  }
+]

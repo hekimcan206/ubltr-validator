@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "TAX-008",
+    "severity": "Error",
+    "line": 104,
+    "column": 4,
+    "path": "/Invoice/cac:WithholdingTaxTotal",
+    "messageTr": "Fatura tipi 'SATIS' iken cac:WithholdingTaxTotal kullanılmış.",
+    "messageEn": "cac:WithholdingTaxTotal is used on invoice type 'SATIS'.",
+    "fixTr": "Tevkifat uygulanıyorsa fatura tipini TEVKIFAT yapın; uygulanmıyorsa cac:WithholdingTaxTotal'ı kaldırın.",
+    "fixEn": "If VAT is withheld, set the invoice type to TEVKIFAT; otherwise remove cac:WithholdingTaxTotal."
+  }
+]

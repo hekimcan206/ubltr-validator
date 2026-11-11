@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "TAX-003",
+    "severity": "Error",
+    "line": 99,
+    "column": 12,
+    "path": "/Invoice/cac:TaxTotal/cac:TaxSubtotal[1]/cac:TaxCategory/cac:TaxScheme/cbc:TaxTypeCode",
+    "messageTr": "Vergi türü kodu '9999' GİB listesinde yok.",
+    "messageEn": "Tax type code '9999' is not in the GIB list.",
+    "fixTr": "Dört haneli GİB vergi kodunu baştaki sıfırlarla yazın (KDV için 0015).",
+    "fixEn": "Write the four-digit GIB tax code with leading zeros (0015 for VAT)."
+  }
+]

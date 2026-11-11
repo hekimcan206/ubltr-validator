@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "TAX-002",
+    "severity": "Error",
+    "line": 94,
+    "column": 8,
+    "path": "/Invoice/cac:TaxTotal/cac:TaxSubtotal[1]/cbc:TaxAmount",
+    "messageTr": "Matrah 10734 × %18 = 1932.12, ama cbc:TaxAmount 2146.8.",
+    "messageEn": "Taxable 10734 × 18% = 1932.12, but cbc:TaxAmount is 2146.8.",
+    "fixTr": "Vergi tutarını 1932.12 yapın ya da oranı/matrahı düzeltin.",
+    "fixEn": "Set the tax amount to 1932.12 or correct the rate/taxable amount."
+  }
+]

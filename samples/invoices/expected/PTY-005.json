@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "PTY-005",
+    "severity": "Error",
+    "line": 69,
+    "column": 10,
+    "path": "/Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification/cbc:ID",
+    "messageTr": "Alıcı (AccountingCustomerParty) TCKN '10000000147' geçersiz: son iki hane 46 olmalı.",
+    "messageEn": "Customer (AccountingCustomerParty) TCKN '10000000147' is invalid: the last two digits should be 46.",
+    "fixTr": "TCKN'yi kimlik belgesinden kontrol ederek yeniden yazın.",
+    "fixEn": "Re-enter the TCKN after checking the identity document."
+  }
+]

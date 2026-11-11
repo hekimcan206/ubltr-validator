@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-003",
+    "severity": "Error",
+    "line": 12,
+    "column": 4,
+    "path": "/Invoice/cbc:ProfileID",
+    "messageTr": "cbc:ProfileID 'TEMEL' e-Fatura için geçerli değil. Geçerli değerler: TICARIFATURA, TEMELFATURA, YOLCUBERABERFATURA, IHRACAT, OZELFATURA, KAMU, HKS, ENERJI, ILAC_TIBBICIHAZ, YATIRIMTESVIK, IDIS.",
+    "messageEn": "cbc:ProfileID 'TEMEL' is not valid for an e-Fatura. Valid values: TICARIFATURA, TEMELFATURA, YOLCUBERABERFATURA, IHRACAT, OZELFATURA, KAMU, HKS, ENERJI, ILAC_TIBBICIHAZ, YATIRIMTESVIK, IDIS.",
+    "fixTr": "Senaryoyu listedeki değerlerden biriyle değiştirin; e-Arşiv faturası düzenliyorsanız EARSIVFATURA kullanın.",
+    "fixEn": "Use one of the listed scenarios; for an e-Arşiv invoice use EARSIVFATURA."
+  }
+]

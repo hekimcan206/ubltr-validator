@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-002",
+    "severity": "Error",
+    "line": 11,
+    "column": 4,
+    "path": "/Invoice/cbc:CustomizationID",
+    "messageTr": "cbc:CustomizationID değeri 'TR1.0'; 'TR1.2' veya 'TR1.2.1' olmalı.",
+    "messageEn": "cbc:CustomizationID is 'TR1.0'; it must be 'TR1.2' or 'TR1.2.1'.",
+    "fixTr": "<cbc:CustomizationID>TR1.2</cbc:CustomizationID> yazın.",
+    "fixEn": "Write <cbc:CustomizationID>TR1.2</cbc:CustomizationID>."
+  }
+]

@@ -1,0 +1,385 @@
+[
+  {
+    "file": "valid/temel-satis-try.xml",
+    "Description": "TEMELFATURA / SATIS in TRY, three VAT rates, a line allowance, line tax breakdowns",
+    "expectedRules": []
+  },
+  {
+    "file": "valid/ticari-satis-try.xml",
+    "Description": "TICARIFATURA / SATIS in TRY",
+    "expectedRules": []
+  },
+  {
+    "file": "valid/ticari-satis-usd.xml",
+    "Description": "TICARIFATURA / SATIS in USD with PricingExchangeRate",
+    "expectedRules": []
+  },
+  {
+    "file": "valid/earsiv-satis-tckn.xml",
+    "Description": "EARSIVFATURA / SATIS to a private person (TCKN)",
+    "expectedRules": []
+  },
+  {
+    "file": "valid/temel-tevkifat.xml",
+    "Description": "TEMELFATURA / TEVKIFAT, withholding code 603 at 70 %",
+    "expectedRules": []
+  },
+  {
+    "file": "valid/temel-istisna.xml",
+    "Description": "TEMELFATURA / ISTISNA, exemption code 301 (export of goods)",
+    "expectedRules": []
+  },
+  {
+    "file": "valid/temel-iade.xml",
+    "Description": "TEMELFATURA / IADE referencing the returned invoice",
+    "expectedRules": []
+  },
+  {
+    "file": "valid/temel-satis-no-line-taxes.xml",
+    "Description": "TEMELFATURA / SATIS without line-level TaxTotal (allowed by UBL-TR)",
+    "expectedRules": []
+  },
+  {
+    "file": "invalid/XML-001.xml",
+    "Description": "unclosed element",
+    "expectedRules": [
+      "XML-001"
+    ]
+  },
+  {
+    "file": "invalid/XML-002.xml",
+    "Description": "DOCTYPE with an internal entity",
+    "expectedRules": [
+      "XML-002"
+    ]
+  },
+  {
+    "file": "invalid/DOC-001.xml",
+    "Description": "invoice wrapped in a StandardBusinessDocument envelope",
+    "expectedRules": [
+      "DOC-001"
+    ]
+  },
+  {
+    "file": "invalid/XSD-001.xml",
+    "Description": "mandatory cbc:LineCountNumeric removed",
+    "expectedRules": [
+      "XSD-001"
+    ]
+  },
+  {
+    "file": "invalid/HDR-001.xml",
+    "Description": "UBLVersionID 2.0",
+    "expectedRules": [
+      "HDR-001"
+    ]
+  },
+  {
+    "file": "invalid/HDR-002.xml",
+    "Description": "CustomizationID TR1.0",
+    "expectedRules": [
+      "HDR-002"
+    ]
+  },
+  {
+    "file": "invalid/HDR-003.xml",
+    "Description": "unknown scenario TEMEL",
+    "expectedRules": [
+      "HDR-003"
+    ]
+  },
+  {
+    "file": "invalid/HDR-004.xml",
+    "Description": "unknown invoice type SATISS",
+    "expectedRules": [
+      "HDR-004"
+    ]
+  },
+  {
+    "file": "invalid/HDR-005.xml",
+    "Description": "IADE under TICARIFATURA",
+    "expectedRules": [
+      "HDR-005"
+    ]
+  },
+  {
+    "file": "invalid/HDR-006.xml",
+    "Description": "ENERJI scenario with type SATIS",
+    "expectedRules": [
+      "HDR-006"
+    ]
+  },
+  {
+    "file": "invalid/HDR-007.xml",
+    "Description": "TEKNOLOJIDESTEK under TEMELFATURA",
+    "expectedRules": [
+      "HDR-007"
+    ]
+  },
+  {
+    "file": "invalid/HDR-008.xml",
+    "Description": "IDIS scenario with type KOMISYONCU",
+    "expectedRules": [
+      "HDR-008"
+    ]
+  },
+  {
+    "file": "invalid/HDR-009.xml",
+    "Description": "YTBSATIS on an e-Fatura (TEMELFATURA)",
+    "expectedRules": [
+      "HDR-009"
+    ]
+  },
+  {
+    "file": "invalid/HDR-010.xml",
+    "Description": "two-character series prefix",
+    "expectedRules": [
+      "HDR-010"
+    ]
+  },
+  {
+    "file": "invalid/HDR-011.xml",
+    "Description": "number from the 2025 sequence on a 2026 invoice (warning)",
+    "expectedRules": [
+      "HDR-011"
+    ]
+  },
+  {
+    "file": "invalid/HDR-012.xml",
+    "Description": "ETTN is not a UUID",
+    "expectedRules": [
+      "HDR-012"
+    ]
+  },
+  {
+    "file": "invalid/HDR-013.xml",
+    "Description": "CopyIndicator true",
+    "expectedRules": [
+      "HDR-013"
+    ]
+  },
+  {
+    "file": "invalid/HDR-014.xml",
+    "Description": "future issue date (warning)",
+    "expectedRules": [
+      "HDR-014"
+    ]
+  },
+  {
+    "file": "invalid/HDR-015.xml",
+    "Description": "LineCountNumeric says 5, invoice has 4 lines",
+    "expectedRules": [
+      "HDR-015"
+    ]
+  },
+  {
+    "file": "invalid/RET-001.xml",
+    "Description": "IADE without a BillingReference",
+    "expectedRules": [
+      "RET-001"
+    ]
+  },
+  {
+    "file": "invalid/PTY-001.xml",
+    "Description": "supplier identified only by MERSIS number",
+    "expectedRules": [
+      "PTY-001"
+    ]
+  },
+  {
+    "file": "invalid/PTY-002.xml",
+    "Description": "customer VKN has 9 digits",
+    "expectedRules": [
+      "PTY-002"
+    ]
+  },
+  {
+    "file": "invalid/PTY-003.xml",
+    "Description": "customer VKN check digit off by one",
+    "expectedRules": [
+      "PTY-003"
+    ]
+  },
+  {
+    "file": "invalid/PTY-004.xml",
+    "Description": "customer TCKN has 10 digits",
+    "expectedRules": [
+      "PTY-004"
+    ]
+  },
+  {
+    "file": "invalid/PTY-005.xml",
+    "Description": "customer TCKN check digits wrong",
+    "expectedRules": [
+      "PTY-005"
+    ]
+  },
+  {
+    "file": "invalid/PTY-006.xml",
+    "Description": "VKN customer without PartyName",
+    "expectedRules": [
+      "PTY-006"
+    ]
+  },
+  {
+    "file": "invalid/PTY-007.xml",
+    "Description": "TCKN customer without Person",
+    "expectedRules": [
+      "PTY-007"
+    ]
+  },
+  {
+    "file": "invalid/PTY-008.xml",
+    "Description": "extra identifier with unknown schemeID",
+    "expectedRules": [
+      "PTY-008"
+    ]
+  },
+  {
+    "file": "invalid/CUR-001.xml",
+    "Description": "TaxCurrencyCode \u0027TL\u0027",
+    "expectedRules": [
+      "CUR-001"
+    ]
+  },
+  {
+    "file": "invalid/CUR-002.xml",
+    "Description": "USD invoice without PricingExchangeRate",
+    "expectedRules": [
+      "CUR-002"
+    ]
+  },
+  {
+    "file": "invalid/CUR-003.xml",
+    "Description": "exchange rate with 7 decimals",
+    "expectedRules": [
+      "CUR-003"
+    ]
+  },
+  {
+    "file": "invalid/CUR-004.xml",
+    "Description": "exchange rate targets EUR instead of TRY",
+    "expectedRules": [
+      "CUR-004"
+    ]
+  },
+  {
+    "file": "invalid/CUR-005.xml",
+    "Description": "one line amount in EUR on a TRY invoice",
+    "expectedRules": [
+      "CUR-005"
+    ]
+  },
+  {
+    "file": "invalid/TOT-001.xml",
+    "Description": "line 1 price changed, amount kept",
+    "expectedRules": [
+      "TOT-001"
+    ]
+  },
+  {
+    "file": "invalid/TOT-002.xml",
+    "Description": "LegalMonetaryTotal line total \u002B10 (allowance total added so TaxExclusive still adds up)",
+    "expectedRules": [
+      "TOT-002"
+    ]
+  },
+  {
+    "file": "invalid/TOT-003.xml",
+    "Description": "TaxExclusiveAmount \u002B5 (and the totals after it)",
+    "expectedRules": [
+      "TOT-003"
+    ]
+  },
+  {
+    "file": "invalid/TOT-004.xml",
+    "Description": "TaxInclusiveAmount \u002B5 (and PayableAmount)",
+    "expectedRules": [
+      "TOT-004"
+    ]
+  },
+  {
+    "file": "invalid/TOT-005.xml",
+    "Description": "PayableAmount \u002B5",
+    "expectedRules": [
+      "TOT-005"
+    ]
+  },
+  {
+    "file": "invalid/TOT-006.xml",
+    "Description": "PayableAmount with three decimals",
+    "expectedRules": [
+      "TOT-006"
+    ]
+  },
+  {
+    "file": "invalid/TAX-001.xml",
+    "Description": "document TaxTotal/TaxAmount \u002B3",
+    "expectedRules": [
+      "TAX-001"
+    ]
+  },
+  {
+    "file": "invalid/TAX-002.xml",
+    "Description": "document 20 % subtotal labelled 18 %",
+    "expectedRules": [
+      "TAX-002"
+    ]
+  },
+  {
+    "file": "invalid/TAX-003.xml",
+    "Description": "tax type code 9999",
+    "expectedRules": [
+      "TAX-003"
+    ]
+  },
+  {
+    "file": "invalid/TAX-004.xml",
+    "Description": "line 1 taxable and tax raised consistently, document breakdown unchanged",
+    "expectedRules": [
+      "TAX-004"
+    ]
+  },
+  {
+    "file": "invalid/TAX-005.xml",
+    "Description": "zero VAT on ISTISNA without exemption reason",
+    "expectedRules": [
+      "TAX-005"
+    ]
+  },
+  {
+    "file": "invalid/TAX-006.xml",
+    "Description": "exemption code 999",
+    "expectedRules": [
+      "TAX-006"
+    ]
+  },
+  {
+    "file": "invalid/TAX-007.xml",
+    "Description": "exemption code 301 on a SATIS invoice",
+    "expectedRules": [
+      "TAX-007"
+    ]
+  },
+  {
+    "file": "invalid/TAX-008.xml",
+    "Description": "withholding on a SATIS invoice",
+    "expectedRules": [
+      "TAX-008"
+    ]
+  },
+  {
+    "file": "invalid/TAX-009.xml",
+    "Description": "withholding code 603 with 40 % (603 is defined at 70 %)",
+    "expectedRules": [
+      "TAX-009"
+    ]
+  },
+  {
+    "file": "invalid/TAX-010.xml",
+    "Description": "tax code 4171 on a SATIS invoice",
+    "expectedRules": [
+      "TAX-010"
+    ]
+  }
+]

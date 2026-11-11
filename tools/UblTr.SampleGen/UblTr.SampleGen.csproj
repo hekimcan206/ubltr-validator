@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>UblTr.SampleGen</RootNamespace>
+    <Description>Synthetic UBL-TR invoice generator: valid samples, one invalid sample per rule, and large invoices for benchmarks.</Description>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Bogus" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\UblTr.Validator\UblTr.Validator.csproj" />
+  </ItemGroup>
+
+</Project>

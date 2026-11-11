@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "CUR-001",
+    "severity": "Error",
+    "line": 21,
+    "column": 4,
+    "path": "/Invoice/cbc:TaxCurrencyCode",
+    "messageTr": "cbc:TaxCurrencyCode değeri 'TL' geçerli bir para birimi kodu değil.",
+    "messageEn": "cbc:TaxCurrencyCode value 'TL' is not a valid currency code.",
+    "fixTr": "Üç harfli ISO 4217 kodunu büyük harfle yazın (ör. TRY, EUR). 'TL' veya 'YTL' geçerli değildir.",
+    "fixEn": "Write the three-letter ISO 4217 code in upper case (e.g. TRY, EUR). 'TL' or 'YTL' are not valid."
+  }
+]

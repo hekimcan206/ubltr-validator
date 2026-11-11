@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "TOT-001",
+    "severity": "Error",
+    "line": 135,
+    "column": 6,
+    "path": "/Invoice/cac:InvoiceLine[1]/cbc:LineExtensionAmount",
+    "messageTr": "Satır 1: cbc:LineExtensionAmount 3751.5, hesaplanan 3900.",
+    "messageEn": "Line 1: cbc:LineExtensionAmount is 3751.5, computed 3900.",
+    "fixTr": "Satır tutarını 3900 yapın ya da miktar, fiyat ve iskonto değerlerini düzeltin.",
+    "fixEn": "Set the line amount to 3900 or correct the quantity, price and allowance values."
+  }
+]

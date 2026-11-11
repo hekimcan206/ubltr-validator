@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-008",
+    "severity": "Error",
+    "line": 18,
+    "column": 4,
+    "path": "/Invoice/cbc:InvoiceTypeCode",
+    "messageTr": "Senaryo 'IDIS' için fatura tipi 'KOMISYONCU' geçersiz. İzin verilenler: SATIS, ISTISNA, IADE, TEVKIFAT, TEVKIFATIADE, IHRACKAYITLI.",
+    "messageEn": "Invoice type 'KOMISYONCU' is not allowed in scenario 'IDIS'. Allowed: SATIS, ISTISNA, IADE, TEVKIFAT, TEVKIFATIADE, IHRACKAYITLI.",
+    "fixTr": "Fatura tipini izin verilenlerden biri yapın ya da doğru senaryoyu seçin.",
+    "fixEn": "Use one of the allowed types or pick the right scenario."
+  }
+]

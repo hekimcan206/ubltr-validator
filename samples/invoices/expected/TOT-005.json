@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "TOT-005",
+    "severity": "Error",
+    "line": 130,
+    "column": 6,
+    "path": "/Invoice/cac:LegalMonetaryTotal/cbc:PayableAmount",
+    "messageTr": "cbc:PayableAmount 14576.24, hesaplanan 14571.24.",
+    "messageEn": "cbc:PayableAmount is 14576.24, computed 14571.24.",
+    "fixTr": "cbc:PayableAmount değerini 14571.24 yapın.",
+    "fixEn": "Set cbc:PayableAmount to 14571.24."
+  }
+]

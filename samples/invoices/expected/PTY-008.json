@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "PTY-008",
+    "severity": "Error",
+    "line": 72,
+    "column": 10,
+    "path": "/Invoice/cac:AccountingCustomerParty/cac:Party/cac:PartyIdentification[2]/cbc:ID",
+    "messageTr": "Alıcı (AccountingCustomerParty) kimlik türü 'SICILNO' GİB kod listesinde yok.",
+    "messageEn": "Customer (AccountingCustomerParty) identifier type 'SICILNO' is not in the GIB code list.",
+    "fixTr": "schemeID'yi kod listesindeki bir değerle değiştirin (büyük harf, ör. MERSISNO).",
+    "fixEn": "Use a schemeID from the code list (upper case, e.g. MERSISNO)."
+  }
+]

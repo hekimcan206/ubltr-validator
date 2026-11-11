@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "TOT-002",
+    "severity": "Error",
+    "line": 127,
+    "column": 6,
+    "path": "/Invoice/cac:LegalMonetaryTotal/cbc:LineExtensionAmount",
+    "messageTr": "LegalMonetaryTotal/cbc:LineExtensionAmount 12306.33, satırların toplamı 12296.33.",
+    "messageEn": "LegalMonetaryTotal/cbc:LineExtensionAmount is 12306.33, the lines add up to 12296.33.",
+    "fixTr": "Toplamı 12296.33 yapın ya da eksik/fazla satırı düzeltin.",
+    "fixEn": "Set the total to 12296.33 or fix the missing/extra line."
+  }
+]

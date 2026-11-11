@@ -1,0 +1,12 @@
+[
+  {
+    "ruleId": "XML-001",
+    "severity": "Error",
+    "line": 238,
+    "column": 3,
+    "messageTr": "XML ayrıştırma hatası: The 'cbc:Note' start tag on line 19 position 4 does not match the end tag of 'Invoice'. Line 238, position 3.",
+    "messageEn": "XML parse error: The 'cbc:Note' start tag on line 19 position 4 does not match the end tag of 'Invoice'. Line 238, position 3.",
+    "fixTr": "Belirtilen satır ve sütundaki kapanmamış etiketi, eksik tırnağı veya geçersiz karakteri düzeltin; dosyanın UTF-8 olarak kaydedildiğinden emin olun.",
+    "fixEn": "Fix the unclosed tag, missing quote or invalid character at the reported line and column, and make sure the file is saved as UTF-8."
+  }
+]

@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "HDR-004",
+    "severity": "Error",
+    "line": 18,
+    "column": 4,
+    "path": "/Invoice/cbc:InvoiceTypeCode",
+    "messageTr": "cbc:InvoiceTypeCode 'SATISS' GİB kod listesinde yok.",
+    "messageEn": "cbc:InvoiceTypeCode 'SATISS' is not in the GIB code list.",
+    "fixTr": "Kod listesindeki bir tipi kullanın (ör. SATIS, IADE, TEVKIFAT, ISTISNA, OZELMATRAH, IHRACKAYITLI).",
+    "fixEn": "Use a type from the code list (e.g. SATIS, IADE, TEVKIFAT, ISTISNA, OZELMATRAH, IHRACKAYITLI)."
+  }
+]

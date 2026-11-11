@@ -1,0 +1,13 @@
+[
+  {
+    "ruleId": "CUR-003",
+    "severity": "Error",
+    "line": 93,
+    "column": 6,
+    "path": "/Invoice/cac:PricingExchangeRate/cbc:CalculationRate",
+    "messageTr": "cbc:CalculationRate '34.1234567' geçerli değil.",
+    "messageEn": "cbc:CalculationRate '34.1234567' is not valid.",
+    "fixTr": "Kuru nokta ondalık ayıracıyla ve en fazla 6 ondalıkla yazın (ör. 34.123456).",
+    "fixEn": "Write the rate with a dot decimal separator and at most 6 decimals (e.g. 34.123456)."
+  }
+]
