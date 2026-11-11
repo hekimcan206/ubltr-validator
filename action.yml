@@ -79,7 +79,8 @@ runs:
         UBLTR_DISABLE: ${{ inputs.disable }}
       run: |
         set +e
-        report="$RUNNER_TEMP/ubltr-report.json"
+        # One file per invocation: a workflow may run the action several times, and each report output must stay valid.
+        report="$RUNNER_TEMP/ubltr-report-$$-$RANDOM.json"
         args=(validate "$UBLTR_PATHS" --format github --lang "$UBLTR_LANG" --kind "$UBLTR_KIND" --fail-on "$UBLTR_FAIL_ON" --output-json "$report")
         if [ -n "$UBLTR_DISABLE" ]; then
           read -r -a disabled <<< "$UBLTR_DISABLE"
