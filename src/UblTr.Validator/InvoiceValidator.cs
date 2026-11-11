@@ -100,6 +100,8 @@ public sealed class InvoiceValidator(GibAssets assets)
         HeaderChecks.Run(context);
         PartyChecks.Run(context);
         CurrencyChecks.Run(context);
+        TotalsChecks.Run(context);
+        TaxChecks.Run(context);
 
         var summary = new DocumentSummary(
             InvoiceContext.Text(root, Ns.Cbc + "ID"),
