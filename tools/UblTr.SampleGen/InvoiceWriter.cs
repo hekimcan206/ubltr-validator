@@ -20,7 +20,8 @@ public static class InvoiceWriter
         var cur = spec.Currency;
         var lines = spec.Lines.Select((l, i) => Compute(l, i + 1, spec)).ToList();
         var lineExtension = lines.Sum(l => l.Extension);
-        var vatGroups = lines.GroupBy(l => l.Spec.VatPercent).OrderByDescending(g => g.Key)
+        // An exempt (istisna) invoice has one 0 % VAT subtotal, whatever rates the goods would otherwise carry.
+        var vatGroups = lines.GroupBy(l => spec.Exemption is null ? l.Spec.VatPercent : 0m).OrderByDescending(g => g.Key)
             .Select(g => (Percent: g.Key, Taxable: g.Sum(l => l.Extension), Tax: g.Sum(l => l.Vat))).ToList();
         var vatTotal = vatGroups.Sum(g => g.Tax);
         var withheld = spec.Withholding is { } w ? Round(vatTotal * w.Percent / 100m) : 0m;

@@ -4,7 +4,7 @@
     "severity": "Error",
     "line": 97,
     "column": 10,
-    "path": "/Invoice/cac:TaxTotal/cac:TaxSubtotal[1]/cac:TaxCategory/cbc:TaxExemptionReasonCode",
+    "path": "/Invoice/cac:TaxTotal/cac:TaxSubtotal/cac:TaxCategory/cbc:TaxExemptionReasonCode",
     "messageTr": "cbc:TaxExemptionReasonCode '999' geçerli değil.",
     "messageEn": "cbc:TaxExemptionReasonCode '999' is not valid.",
     "fixTr": "Kod listesinden faturaya uyan muafiyet kodunu yazın (ör. 301 mal ihracatı, 351 diğer).",
