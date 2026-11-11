@@ -1,0 +1,35 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+artifacts/
+publish/
+
+# GIB e-Belge packages are fetched at build time and never committed (see docs/gib-package.md)
+.gib/
+
+# Tests and coverage
+TestResults/
+coverage/
+*.coverage
+*.cobertura.xml
+
+# Benchmarks
+BenchmarkDotNet.Artifacts/
+benchmark-results/large/
+
+# IDEs
+.vs/
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.user
+*.suo
+*.DotSettings.user
+
+# Secrets and local environment
+.env
+appsettings.*.local.json
+
+# OS
+.DS_Store
+Thumbs.db

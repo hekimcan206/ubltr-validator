@@ -1,0 +1,72 @@
+<Project>
+  <!--
+    GIB (Gelir Idaresi Baskanligi) publishes the UBL-TR XSDs, the Schematron rules and the code lists on
+    ebelge.gib.gov.tr without a licence that grants redistribution, so this repository never commits them.
+    They are downloaded at build time, verified against pinned SHA-256 hashes and copied next to the binaries
+    (bin/.../gib/). See docs/gib-package.md for the versions, the sources and how to update a pin.
+
+    Knobs:
+      -p:UblTrFetchGib=false        never touch the network (validation then needs -schemas / UBLTR_GIB_DIR)
+      -p:GibCacheDir=<dir>          where downloads and extracted files live (default: <repo>/.gib)
+  -->
+  <PropertyGroup>
+    <UblTrFetchGib Condition="'$(UblTrFetchGib)' == ''">true</UblTrFetchGib>
+    <!-- curl rather than the DownloadFile task: ebelge.gib.gov.tr stalls requests that carry no User-Agent header,
+         and DownloadFile cannot set one. curl ships with Windows 10+, the .NET SDK images and GitHub runners. -->
+    <_GibCurl>curl -fsSL --retry 6 --retry-delay 5 --retry-all-errors --connect-timeout 20 --max-time 90 -A &quot;ubltr-validator-build/1.0&quot;</_GibCurl>
+    <GibCacheDir Condition="'$(GibCacheDir)' == ''">$([MSBuild]::NormalizeDirectory('$(MSBuildThisFileDirectory)', '..', '.gib'))</GibCacheDir>
+
+    <!-- UBL-TR 1.2.1 package: UBL 2.1 XSDs as profiled by GIB (xsdrt/) and official sample documents (xml/). -->
+    <GibUblTrUrl>https://ebelge.gib.gov.tr/dosyalar/kilavuzlar/UBL-TR1.2.1_Paketi.zip</GibUblTrUrl>
+    <GibUblTrSha256>CB583941B8A8A239C59902C6BC455C0F75D48F2BB81D7D3FBE1AE827F981F7DB</GibUblTrSha256>
+    <GibUblTrDir>$(GibCacheDir)ubltr-$(GibUblTrSha256.Substring(0, 12))\</GibUblTrDir>
+
+    <!-- e-Fatura package: Schematron rules (UBL-TR_Main/Common_Schematron.xml) and code lists (UBL-TR_Codelist.xml). -->
+    <!-- The file name contains a space. Exec runs through cmd.exe on Windows, where a single % starts a batch
+         variable, so the escaped space is %%20 there and %20 elsewhere (%25 is MSBuild's escape for %). -->
+    <_GibSpace Condition="'$(OS)' == 'Windows_NT'">%25%2520</_GibSpace>
+    <_GibSpace Condition="'$(OS)' != 'Windows_NT'">%2520</_GibSpace>
+    <GibEFaturaUrl>https://ebelge.gib.gov.tr/dosyalar/kilavuzlar/e-FaturaPaketi$(_GibSpace)(29).zip</GibEFaturaUrl>
+    <GibEFaturaSha256>12901476CD424FD65C779A4FB44CEE798F9921CE55B003F8A076C936DDF8B583</GibEFaturaSha256>
+    <GibEFaturaDir>$(GibCacheDir)efatura-$(GibEFaturaSha256.Substring(0, 12))\</GibEFaturaDir>
+  </PropertyGroup>
+
+  <Target Name="FetchGibPackages" Condition="'$(UblTrFetchGib)' == 'true'">
+    <MakeDir Directories="$(GibCacheDir)downloads" />
+
+    <Exec Condition="!Exists('$(GibUblTrDir).verified')" Command="$(_GibCurl) -o &quot;$(GibCacheDir)downloads/UBL-TR1.2.1_Paketi.zip&quot; &quot;$(GibUblTrUrl)&quot;" />
+    <GetFileHash Condition="!Exists('$(GibUblTrDir).verified')" Files="$(GibCacheDir)downloads\UBL-TR1.2.1_Paketi.zip" Algorithm="SHA256">
+      <Output TaskParameter="Hash" PropertyName="_GibUblTrActual" />
+    </GetFileHash>
+    <Error Condition="!Exists('$(GibUblTrDir).verified') And '$(_GibUblTrActual)' != '$(GibUblTrSha256)'"
+           Text="UBL-TR package hash mismatch: expected $(GibUblTrSha256), got $(_GibUblTrActual). GIB replaced the file; review the change and update the pin (docs/gib-package.md)." />
+    <Unzip Condition="!Exists('$(GibUblTrDir).verified')" SourceFiles="$(GibCacheDir)downloads\UBL-TR1.2.1_Paketi.zip"
+           DestinationFolder="$(GibUblTrDir)" Include="UBLTR_1.2.1_Paketi/xsdrt/**/*.xsd;UBLTR_1.2.1_Paketi/xml/*.xml" />
+    <WriteLinesToFile Condition="!Exists('$(GibUblTrDir).verified')" File="$(GibUblTrDir).verified" Lines="$(GibUblTrSha256) $(GibUblTrUrl)" Overwrite="true" />
+
+    <Exec Condition="!Exists('$(GibEFaturaDir).verified')" Command="$(_GibCurl) -o &quot;$(GibCacheDir)downloads/e-FaturaPaketi.zip&quot; &quot;$(GibEFaturaUrl)&quot;" />
+    <GetFileHash Condition="!Exists('$(GibEFaturaDir).verified')" Files="$(GibCacheDir)downloads\e-FaturaPaketi.zip" Algorithm="SHA256">
+      <Output TaskParameter="Hash" PropertyName="_GibEFaturaActual" />
+    </GetFileHash>
+    <Error Condition="!Exists('$(GibEFaturaDir).verified') And '$(_GibEFaturaActual)' != '$(GibEFaturaSha256)'"
+           Text="e-Fatura package hash mismatch: expected $(GibEFaturaSha256), got $(_GibEFaturaActual). GIB replaced the file; review the change and update the pin (docs/gib-package.md)." />
+    <Unzip Condition="!Exists('$(GibEFaturaDir).verified')" SourceFiles="$(GibCacheDir)downloads\e-FaturaPaketi.zip"
+           DestinationFolder="$(GibEFaturaDir)" Include="e-FaturaPaketi/schematron/*.xml;e-FaturaPaketi/schematron/*.txt" />
+    <WriteLinesToFile Condition="!Exists('$(GibEFaturaDir).verified')" File="$(GibEFaturaDir).verified" Lines="$(GibEFaturaSha256) $(GibEFaturaUrl)" Overwrite="true" />
+  </Target>
+
+  <!-- Runs before AssignTargetPaths so the files also flow to every project that references this one. -->
+  <Target Name="IncludeGibPackages" BeforeTargets="AssignTargetPaths" DependsOnTargets="FetchGibPackages"
+          Condition="'$(UblTrFetchGib)' == 'true'">
+    <ItemGroup>
+      <_GibCommonXsd Include="$(GibUblTrDir)UBLTR_1.2.1_Paketi\xsdrt\common\*.xsd" />
+      <_GibMainXsd Include="$(GibUblTrDir)UBLTR_1.2.1_Paketi\xsdrt\maindoc\*.xsd" />
+      <None Include="@(_GibCommonXsd)" Link="gib\xsdrt\common\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+      <None Include="@(_GibMainXsd)" Link="gib\xsdrt\maindoc\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+      <None Include="$(GibEFaturaDir)e-FaturaPaketi\schematron\UBL-TR_Codelist.xml" Link="gib\schematron\UBL-TR_Codelist.xml"
+            CopyToOutputDirectory="PreserveNewest" Visible="false" />
+      <None Include="$(GibUblTrDir).verified" Link="gib\ubltr.verified" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+      <None Include="$(GibEFaturaDir).verified" Link="gib\efatura.verified" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+    </ItemGroup>
+  </Target>
+</Project>

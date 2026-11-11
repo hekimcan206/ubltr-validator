@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <RootNamespace>UblTr.Validator</RootNamespace>
+    <Description>UBL-TR (e-Fatura / e-Arsiv) validator: XSD validation plus testable C# business rules with Turkish and English explanations.</Description>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <Import Project="..\..\build\GibPackages.targets" />
+
+</Project>
