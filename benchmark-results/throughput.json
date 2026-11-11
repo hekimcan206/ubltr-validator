@@ -1,0 +1,278 @@
+{
+  "environment": {
+    "os": "Microsoft Windows 10.0.26200",
+    "framework": ".NET 10.0.12",
+    "processors": 16,
+    "arch": "X64",
+    "serverGc": false,
+    "timestampUtc": "2026-11-11T17:57:47.4050184Z"
+  },
+  "rounds": 7,
+  "sliceMs": 600,
+  "rows": [
+    {
+      "Lines": 1,
+      "Bytes": 5741,
+      "Mode": "parse-only",
+      "DocsPerSecond": 17502.02943214064,
+      "MegabytesPerSecond": 95.82438561431829,
+      "MillisecondsPerDoc": 0.05713623119405827,
+      "AllocatedBytesPerDoc": 65227,
+      "SlowestSlice": 1447.8319008849935,
+      "FastestSlice": 21180.014625525877
+    },
+    {
+      "Lines": 1,
+      "Bytes": 5741,
+      "Mode": "xsd-only",
+      "DocsPerSecond": 11782.461431187425,
+      "MegabytesPerSecond": 64.50949771542264,
+      "MillisecondsPerDoc": 0.08487190947666196,
+      "AllocatedBytesPerDoc": 77504,
+      "SlowestSlice": 1286.2779963321082,
+      "FastestSlice": 13220.913074621414
+    },
+    {
+      "Lines": 1,
+      "Bytes": 5741,
+      "Mode": "rules-only",
+      "DocsPerSecond": 13177.650291793208,
+      "MegabytesPerSecond": 72.14821846502763,
+      "MillisecondsPerDoc": 0.0758860629821677,
+      "AllocatedBytesPerDoc": 72344,
+      "SlowestSlice": 1174.3275064874535,
+      "FastestSlice": 14795.958926631343
+    },
+    {
+      "Lines": 1,
+      "Bytes": 5741,
+      "Mode": "full",
+      "DocsPerSecond": 9350.313987909749,
+      "MegabytesPerSecond": 51.19338283976543,
+      "MillisecondsPerDoc": 0.10694828016396364,
+      "AllocatedBytesPerDoc": 83767,
+      "SlowestSlice": 1286.6490824625398,
+      "FastestSlice": 10278.328366277055
+    },
+    {
+      "Lines": 10,
+      "Bytes": 15571,
+      "Mode": "parse-only",
+      "DocsPerSecond": 6207.598033512719,
+      "MegabytesPerSecond": 92.18073747618345,
+      "MillisecondsPerDoc": 0.16109290495314593,
+      "AllocatedBytesPerDoc": 143825,
+      "SlowestSlice": 793.0875945338014,
+      "FastestSlice": 6628.880823954223
+    },
+    {
+      "Lines": 10,
+      "Bytes": 15571,
+      "Mode": "xsd-only",
+      "DocsPerSecond": 4056.9722191538067,
+      "MegabytesPerSecond": 60.24466936535256,
+      "MillisecondsPerDoc": 0.24648924024640662,
+      "AllocatedBytesPerDoc": 173232,
+      "SlowestSlice": 217.4649234058659,
+      "FastestSlice": 4545.621173796694
+    },
+    {
+      "Lines": 10,
+      "Bytes": 15571,
+      "Mode": "rules-only",
+      "DocsPerSecond": 4860.876774190861,
+      "MegabytesPerSecond": 72.18238091557112,
+      "MillisecondsPerDoc": 0.20572420294823446,
+      "AllocatedBytesPerDoc": 163649,
+      "SlowestSlice": 689.3518943273499,
+      "FastestSlice": 5650.502663118064
+    },
+    {
+      "Lines": 10,
+      "Bytes": 15571,
+      "Mode": "full",
+      "DocsPerSecond": 3463.592049831743,
+      "MegabytesPerSecond": 51.43317395012863,
+      "MillisecondsPerDoc": 0.28871760461760465,
+      "AllocatedBytesPerDoc": 191958,
+      "SlowestSlice": 277.3884582437634,
+      "FastestSlice": 3793.8808051624774
+    },
+    {
+      "Lines": 100,
+      "Bytes": 101288,
+      "Mode": "parse-only",
+      "DocsPerSecond": 980.8617061598114,
+      "MegabytesPerSecond": 94.74708604194163,
+      "MillisecondsPerDoc": 1.019511714770798,
+      "AllocatedBytesPerDoc": 844107,
+      "SlowestSlice": 102.61585737503424,
+      "FastestSlice": 1043.7627931691634
+    },
+    {
+      "Lines": 100,
+      "Bytes": 101288,
+      "Mode": "xsd-only",
+      "DocsPerSecond": 631.5223377760375,
+      "MegabytesPerSecond": 61.002382801684654,
+      "MillisecondsPerDoc": 1.583475263157895,
+      "AllocatedBytesPerDoc": 1011897,
+      "SlowestSlice": 101.8849035823718,
+      "FastestSlice": 702.6728208817045
+    },
+    {
+      "Lines": 100,
+      "Bytes": 101288,
+      "Mode": "rules-only",
+      "DocsPerSecond": 693.0262612080793,
+      "MegabytesPerSecond": 66.94340128445047,
+      "MillisecondsPerDoc": 1.4429467625899282,
+      "AllocatedBytesPerDoc": 968993,
+      "SlowestSlice": 84.27102752159568,
+      "FastestSlice": 744.6490400925359
+    },
+    {
+      "Lines": 100,
+      "Bytes": 101288,
+      "Mode": "full",
+      "DocsPerSecond": 475.8310280761935,
+      "MegabytesPerSecond": 45.963261768132675,
+      "MillisecondsPerDoc": 2.101586363636364,
+      "AllocatedBytesPerDoc": 1146113,
+      "SlowestSlice": 75.92174778465292,
+      "FastestSlice": 550.4412926091034
+    },
+    {
+      "Lines": 1000,
+      "Bytes": 967536,
+      "Mode": "parse-only",
+      "DocsPerSecond": 88.25525684944053,
+      "MegabytesPerSecond": 81.43438166721371,
+      "MillisecondsPerDoc": 11.330769811320755,
+      "AllocatedBytesPerDoc": 7785222,
+      "SlowestSlice": 8.752608824467742,
+      "FastestSlice": 101.63598953715803
+    },
+    {
+      "Lines": 1000,
+      "Bytes": 967536,
+      "Mode": "xsd-only",
+      "DocsPerSecond": 59.3565355832538,
+      "MegabytesPerSecond": 54.76912022788911,
+      "MillisecondsPerDoc": 16.847344444444445,
+      "AllocatedBytesPerDoc": 9467346,
+      "SlowestSlice": 4.665798931749782,
+      "FastestSlice": 64.42846581780786
+    },
+    {
+      "Lines": 1000,
+      "Bytes": 967536,
+      "Mode": "rules-only",
+      "DocsPerSecond": 55.917392249652075,
+      "MegabytesPerSecond": 51.595773723277446,
+      "MillisecondsPerDoc": 17.883523529411764,
+      "AllocatedBytesPerDoc": 9078817,
+      "SlowestSlice": 6.5990388367953425,
+      "FastestSlice": 65.9582965478417
+    },
+    {
+      "Lines": 1000,
+      "Bytes": 967536,
+      "Mode": "full",
+      "DocsPerSecond": 39.573738075938046,
+      "MegabytesPerSecond": 36.51525139144973,
+      "MillisecondsPerDoc": 25.269283333333334,
+      "AllocatedBytesPerDoc": 10755863,
+      "SlowestSlice": 2.587316096805984,
+      "FastestSlice": 43.86813628172702
+    },
+    {
+      "Lines": 10000,
+      "Bytes": 9629391,
+      "Mode": "parse-only",
+      "DocsPerSecond": 6.034323837419627,
+      "MegabytesPerSecond": 55.41502347100641,
+      "MillisecondsPerDoc": 165.71865,
+      "AllocatedBytesPerDoc": 77113278,
+      "SlowestSlice": 0.672932384965237,
+      "FastestSlice": 7.00861414747638
+    },
+    {
+      "Lines": 10000,
+      "Bytes": 9629391,
+      "Mode": "xsd-only",
+      "DocsPerSecond": 2.766676871093193,
+      "MegabytesPerSecond": 25.407231676495506,
+      "MillisecondsPerDoc": 361.44444999999996,
+      "AllocatedBytesPerDoc": 94029828,
+      "SlowestSlice": 1.3123914160152175,
+      "FastestSlice": 5.739554512997365
+    },
+    {
+      "Lines": 10000,
+      "Bytes": 9629391,
+      "Mode": "rules-only",
+      "DocsPerSecond": 3.8841955578526974,
+      "MegabytesPerSecond": 35.66974425032305,
+      "MillisecondsPerDoc": 257.4535666666667,
+      "AllocatedBytesPerDoc": 90198184,
+      "SlowestSlice": 1.0782437264275704,
+      "FastestSlice": 4.846192354743866
+    },
+    {
+      "Lines": 10000,
+      "Bytes": 9629391,
+      "Mode": "full",
+      "DocsPerSecond": 3.0807284875425354,
+      "MegabytesPerSecond": 28.29126279009409,
+      "MillisecondsPerDoc": 324.59855,
+      "AllocatedBytesPerDoc": 106863716,
+      "SlowestSlice": 0.36891214265094735,
+      "FastestSlice": 3.3219479105279834
+    },
+    {
+      "Lines": 50000,
+      "Bytes": 48220708,
+      "Mode": "parse-only",
+      "DocsPerSecond": 1.0101580483180819,
+      "MegabytesPerSecond": 46.45398739032375,
+      "MillisecondsPerDoc": 989.9440999999999,
+      "AllocatedBytesPerDoc": 385619368,
+      "SlowestSlice": 0.15043632702727316,
+      "FastestSlice": 1.6215100442007422
+    },
+    {
+      "Lines": 50000,
+      "Bytes": 48220708,
+      "Mode": "xsd-only",
+      "DocsPerSecond": 0.7159234402927726,
+      "MegabytesPerSecond": 32.923064388955325,
+      "MillisecondsPerDoc": 1396.7974000000002,
+      "AllocatedBytesPerDoc": 470028504,
+      "SlowestSlice": 0.08383726797281553,
+      "FastestSlice": 0.8363043043746241
+    },
+    {
+      "Lines": 50000,
+      "Bytes": 48220708,
+      "Mode": "rules-only",
+      "DocsPerSecond": 0.5925456103095351,
+      "MegabytesPerSecond": 27.249306537073025,
+      "MillisecondsPerDoc": 1687.6338,
+      "AllocatedBytesPerDoc": 450811016,
+      "SlowestSlice": 0.08434380871067094,
+      "FastestSlice": 0.7745064689878315
+    },
+    {
+      "Lines": 50000,
+      "Bytes": 48220708,
+      "Mode": "full",
+      "DocsPerSecond": 0.43430066713359783,
+      "MegabytesPerSecond": 19.972119955114763,
+      "MillisecondsPerDoc": 2302.5523,
+      "AllocatedBytesPerDoc": 534182672,
+      "SlowestSlice": 0.08533104254754258,
+      "FastestSlice": 0.5396842512525937
+    }
+  ]
+}

@@ -1,0 +1,230 @@
+{
+  "environment": {
+    "os": "Microsoft Windows 10.0.26200",
+    "framework": ".NET 10.0.12",
+    "processors": 16,
+    "arch": "X64",
+    "serverGc": false,
+    "timestampUtc": "2026-11-11T15:22:15.3278490Z"
+  },
+  "rounds": 5,
+  "minRoundMs": 1500,
+  "rows": [
+    {
+      "Lines": 1,
+      "Bytes": 5741,
+      "Mode": "parse-only",
+      "DocsPerSecond": 13403.07778131697,
+      "MegabytesPerSecond": 73.38244394544671,
+      "MillisecondsPerDoc": 0.07460972892315344,
+      "AllocatedBytesPerDoc": 65227
+    },
+    {
+      "Lines": 1,
+      "Bytes": 5741,
+      "Mode": "xsd-only",
+      "DocsPerSecond": 5659.188458108806,
+      "MegabytesPerSecond": 30.98430722999826,
+      "MillisecondsPerDoc": 0.17670378136411827,
+      "AllocatedBytesPerDoc": 77504
+    },
+    {
+      "Lines": 1,
+      "Bytes": 5741,
+      "Mode": "rules-only",
+      "DocsPerSecond": 7567.031156555816,
+      "MegabytesPerSecond": 41.42983042696661,
+      "MillisecondsPerDoc": 0.13215222447361463,
+      "AllocatedBytesPerDoc": 72415
+    },
+    {
+      "Lines": 1,
+      "Bytes": 5741,
+      "Mode": "full",
+      "DocsPerSecond": 5003.101189438144,
+      "MegabytesPerSecond": 27.392200401844388,
+      "MillisecondsPerDoc": 0.1998760293137908,
+      "AllocatedBytesPerDoc": 83767
+    },
+    {
+      "Lines": 10,
+      "Bytes": 15571,
+      "Mode": "parse-only",
+      "DocsPerSecond": 5113.90897242029,
+      "MegabytesPerSecond": 75.939823731953,
+      "MillisecondsPerDoc": 0.19554513101290577,
+      "AllocatedBytesPerDoc": 143825
+    },
+    {
+      "Lines": 10,
+      "Bytes": 15571,
+      "Mode": "xsd-only",
+      "DocsPerSecond": 2651.2140287020416,
+      "MegabytesPerSecond": 39.36963428585004,
+      "MillisecondsPerDoc": 0.377185692733216,
+      "AllocatedBytesPerDoc": 173232
+    },
+    {
+      "Lines": 10,
+      "Bytes": 15571,
+      "Mode": "rules-only",
+      "DocsPerSecond": 2883.836582593653,
+      "MegabytesPerSecond": 42.824000766340035,
+      "MillisecondsPerDoc": 0.34676028663892744,
+      "AllocatedBytesPerDoc": 163719
+    },
+    {
+      "Lines": 10,
+      "Bytes": 15571,
+      "Mode": "full",
+      "DocsPerSecond": 1765.8609678797957,
+      "MegabytesPerSecond": 26.222439890724466,
+      "MillisecondsPerDoc": 0.5662959984899962,
+      "AllocatedBytesPerDoc": 191958
+    },
+    {
+      "Lines": 100,
+      "Bytes": 101288,
+      "Mode": "parse-only",
+      "DocsPerSecond": 628.5070258820926,
+      "MegabytesPerSecond": 60.71111644510784,
+      "MillisecondsPerDoc": 1.5910721102863201,
+      "AllocatedBytesPerDoc": 844107
+    },
+    {
+      "Lines": 100,
+      "Bytes": 101288,
+      "Mode": "xsd-only",
+      "DocsPerSecond": 361.5169169943843,
+      "MegabytesPerSecond": 34.921002853896326,
+      "MillisecondsPerDoc": 2.7661222836095765,
+      "AllocatedBytesPerDoc": 1011898
+    },
+    {
+      "Lines": 100,
+      "Bytes": 101288,
+      "Mode": "rules-only",
+      "DocsPerSecond": 512.9956795770357,
+      "MegabytesPerSecond": 49.553209679602425,
+      "MillisecondsPerDoc": 1.949334155844156,
+      "AllocatedBytesPerDoc": 969062
+    },
+    {
+      "Lines": 100,
+      "Bytes": 101288,
+      "Mode": "full",
+      "DocsPerSecond": 288.7220702144134,
+      "MegabytesPerSecond": 27.88932900226355,
+      "MillisecondsPerDoc": 3.4635384792626724,
+      "AllocatedBytesPerDoc": 1146113
+    },
+    {
+      "Lines": 1000,
+      "Bytes": 967536,
+      "Mode": "parse-only",
+      "DocsPerSecond": 66.84854766566195,
+      "MegabytesPerSecond": 61.68210641312018,
+      "MillisecondsPerDoc": 14.95918811881188,
+      "AllocatedBytesPerDoc": 7785219
+    },
+    {
+      "Lines": 1000,
+      "Bytes": 967536,
+      "Mode": "xsd-only",
+      "DocsPerSecond": 33.20710868560486,
+      "MegabytesPerSecond": 30.640671834216484,
+      "MillisecondsPerDoc": 30.114034,
+      "AllocatedBytesPerDoc": 9467351
+    },
+    {
+      "Lines": 1000,
+      "Bytes": 967536,
+      "Mode": "rules-only",
+      "DocsPerSecond": 39.897447600687194,
+      "MegabytesPerSecond": 36.81394277742241,
+      "MillisecondsPerDoc": 25.06426,
+      "AllocatedBytesPerDoc": 9078887
+    },
+    {
+      "Lines": 1000,
+      "Bytes": 967536,
+      "Mode": "full",
+      "DocsPerSecond": 20.808690749691607,
+      "MegabytesPerSecond": 19.200475133126847,
+      "MillisecondsPerDoc": 48.056843750000006,
+      "AllocatedBytesPerDoc": 10755872
+    },
+    {
+      "Lines": 10000,
+      "Bytes": 9629391,
+      "Mode": "parse-only",
+      "DocsPerSecond": 3.9378600434660993,
+      "MegabytesPerSecond": 36.162561475574556,
+      "MillisecondsPerDoc": 253.94503333333333,
+      "AllocatedBytesPerDoc": 77113306
+    },
+    {
+      "Lines": 10000,
+      "Bytes": 9629391,
+      "Mode": "xsd-only",
+      "DocsPerSecond": 1.8274060656175832,
+      "MegabytesPerSecond": 16.781623384097447,
+      "MillisecondsPerDoc": 547.22375,
+      "AllocatedBytesPerDoc": 94029842
+    },
+    {
+      "Lines": 10000,
+      "Bytes": 9629391,
+      "Mode": "rules-only",
+      "DocsPerSecond": 2.0305161191253043,
+      "MegabytesPerSecond": 18.646844523296483,
+      "MillisecondsPerDoc": 492.485625,
+      "AllocatedBytesPerDoc": 90198312
+    },
+    {
+      "Lines": 10000,
+      "Bytes": 9629391,
+      "Mode": "full",
+      "DocsPerSecond": 1.7421279047079263,
+      "MegabytesPerSecond": 15.998488203471531,
+      "MillisecondsPerDoc": 574.0106666666667,
+      "AllocatedBytesPerDoc": 106863786
+    },
+    {
+      "Lines": 50000,
+      "Bytes": 48220708,
+      "Mode": "parse-only",
+      "DocsPerSecond": 0.8788902171198674,
+      "MegabytesPerSecond": 40.417393230241515,
+      "MillisecondsPerDoc": 1137.7985333333334,
+      "AllocatedBytesPerDoc": 385619200
+    },
+    {
+      "Lines": 50000,
+      "Bytes": 48220708,
+      "Mode": "xsd-only",
+      "DocsPerSecond": 0.37209238175701004,
+      "MegabytesPerSecond": 17.11135682080203,
+      "MillisecondsPerDoc": 2687.5046333333335,
+      "AllocatedBytesPerDoc": 470028309
+    },
+    {
+      "Lines": 50000,
+      "Bytes": 48220708,
+      "Mode": "rules-only",
+      "DocsPerSecond": 0.39490211903424005,
+      "MegabytesPerSecond": 18.160304804354983,
+      "MillisecondsPerDoc": 2532.2730666666666,
+      "AllocatedBytesPerDoc": 450810874
+    },
+    {
+      "Lines": 50000,
+      "Bytes": 48220708,
+      "Mode": "full",
+      "DocsPerSecond": 0.2751249541882561,
+      "MegabytesPerSecond": 12.65213020269897,
+      "MillisecondsPerDoc": 3634.7120999999993,
+      "AllocatedBytesPerDoc": 534182426
+    }
+  ]
+}

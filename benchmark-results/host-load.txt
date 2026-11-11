@@ -1,0 +1,7 @@
+host before: cpu_load_pct=3 free_ram_gb=2.28
+host after throughput: cpu_load_pct=3 free_ram_gb=2.33
+host after scaling: cpu_load_pct=10 free_ram_gb=2.02
+host after peak: cpu_load_pct=13 free_ram_gb=2.24
+host after micro: cpu_load_pct=50 free_ram_gb=1.86
+host before scaling rerun: cpu_load_pct=43
+host after scaling rerun: cpu_load_pct=3

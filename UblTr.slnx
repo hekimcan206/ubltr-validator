@@ -1,4 +1,7 @@
 <Solution>
+  <Folder Name="/benchmarks/">
+    <Project Path="benchmarks/UblTr.Benchmarks/UblTr.Benchmarks.csproj" />
+  </Folder>
   <Folder Name="/src/">
     <Project Path="src/UblTr.Api/UblTr.Api.csproj" />
     <Project Path="src/UblTr.Cli/UblTr.Cli.csproj" />

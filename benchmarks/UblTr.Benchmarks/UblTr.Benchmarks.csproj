@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+    <!-- BenchmarkDotNet generates code that does not follow the repository analyzers. -->
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <ConcurrentGarbageCollection>false</ConcurrentGarbageCollection>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\UblTr.Validator\UblTr.Validator.csproj" />
+    <ProjectReference Include="..\..\tools\UblTr.SampleGen\UblTr.SampleGen.csproj" />
+  </ItemGroup>
+
+</Project>
