@@ -44,10 +44,11 @@ public static class CliApp
         var failOnOption = new Option<string>("--fail-on") { Description = "error (default) or warning", DefaultValueFactory = _ => "error" };
         failOnOption.AcceptOnlyFromAmong("error", "warning");
         var todayOption = new Option<string?>("--today") { Description = "Override today's date (yyyy-MM-dd) for the issue-date check; useful for reproducible runs" };
+        var jsonOutOption = new Option<string?>("--output-json") { Description = "Also write the JSON reports to this file (for CI artifacts)" };
 
         var validate = new Command("validate", "Validate UBL-TR invoices / UBL-TR faturalarını doğrula")
         {
-            pathsArgument, langOption, formatOption, kindOption, gibDirOption, noSchemaOption, disableOption, failOnOption, todayOption,
+            pathsArgument, langOption, formatOption, kindOption, gibDirOption, noSchemaOption, disableOption, failOnOption, todayOption, jsonOutOption,
         };
         validate.SetAction(parse =>
         {
@@ -88,6 +89,11 @@ public static class CliApp
 
             var format = parse.GetValue(formatOption) switch { "json" => OutputFormat.Json, "github" => OutputFormat.GitHub, _ => OutputFormat.Text };
             Renderers.Write(stdout, format, reports, language);
+            if (parse.GetValue(jsonOutOption) is { Length: > 0 } jsonPath)
+            {
+                File.WriteAllText(Path.GetFullPath(jsonPath, workingDirectory), JsonSerializer.Serialize(reports, ReportJson.Options));
+            }
+
             if (format == OutputFormat.GitHub && Environment.GetEnvironmentVariable("GITHUB_STEP_SUMMARY") is { Length: > 0 } summary)
             {
                 File.AppendAllText(summary, Renderers.StepSummary(reports, language));

@@ -97,11 +97,14 @@ public sealed class InvoiceValidator(GibAssets assets)
         }
 
         var context = new InvoiceContext(root, options, Assets.CodeLists, findings);
-        HeaderChecks.Run(context);
-        PartyChecks.Run(context);
-        CurrencyChecks.Run(context);
-        TotalsChecks.Run(context);
-        TaxChecks.Run(context);
+        if (!options.SkipRules)
+        {
+            HeaderChecks.Run(context);
+            PartyChecks.Run(context);
+            CurrencyChecks.Run(context);
+            TotalsChecks.Run(context);
+            TaxChecks.Run(context);
+        }
 
         var summary = new DocumentSummary(
             InvoiceContext.Text(root, Ns.Cbc + "ID"),

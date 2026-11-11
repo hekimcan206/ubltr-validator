@@ -22,4 +22,7 @@ public sealed record ValidationOptions
 
     /// <summary>Skip XSD validation (business rules only). Used when the GIB schemas are unavailable.</summary>
     public bool SkipSchema { get; init; }
+
+    /// <summary>Run XSD validation only (no business rules), e.g. to measure the schema cost on its own.</summary>
+    public bool SkipRules { get; init; }
 }

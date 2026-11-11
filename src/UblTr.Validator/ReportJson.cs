@@ -16,8 +16,10 @@ public static class ReportJson
         var options = new JsonSerializerOptions(JsonSerializerDefaults.Web)
         {
             WriteIndented = indented,
+            // LF on every OS, so golden files and CI artifacts are byte-identical between Windows and Linux.
+            NewLine = "\n",
             DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
-            // Keep Turkish characters readable (ş, ğ, ı) instead of ş escapes; output is JSON, never HTML.
+            // Keep Turkish characters readable (ş, ğ, ı) instead of \uXXXX escapes; output is JSON, never HTML.
             Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
         };
         options.Converters.Add(new JsonStringEnumConverter(JsonNamingPolicy.CamelCase));
