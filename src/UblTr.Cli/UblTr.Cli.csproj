@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>UblTr.Cli</RootNamespace>
+    <AssemblyName>ubltr</AssemblyName>
+    <Description>Command-line UBL-TR validator: files, directories and globs; text, JSON and GitHub annotation output.</Description>
+    <IsPackable>false</IsPackable>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" />
+    <PackageReference Include="Microsoft.Extensions.FileSystemGlobbing" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UblTr.Validator\UblTr.Validator.csproj" />
+  </ItemGroup>
+
+</Project>
