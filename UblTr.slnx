@@ -1,9 +1,11 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/UblTr.Api/UblTr.Api.csproj" />
     <Project Path="src/UblTr.Cli/UblTr.Cli.csproj" />
     <Project Path="src/UblTr.Validator/UblTr.Validator.csproj" />
   </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/UblTr.Api.Tests/UblTr.Api.Tests.csproj" />
     <Project Path="tests/UblTr.Tests/UblTr.Tests.csproj" />
   </Folder>
   <Folder Name="/tools/">
