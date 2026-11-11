@@ -13,13 +13,13 @@ internal static class PartyChecks
 
     public static void Run(InvoiceContext ctx)
     {
-        CheckParty(ctx, ctx.Root.Element(Ns.Cac + "AccountingSupplierParty"), Supplier);
-        CheckParty(ctx, ctx.Root.Element(Ns.Cac + "AccountingCustomerParty"), Customer);
+        CheckParty(ctx, ctx.Root.Element(N.AccountingSupplierParty), Supplier);
+        CheckParty(ctx, ctx.Root.Element(N.AccountingCustomerParty), Customer);
     }
 
     private static void CheckParty(InvoiceContext ctx, XElement? wrapper, LocalizedText role)
     {
-        var party = wrapper?.Element(Ns.Cac + "Party");
+        var party = wrapper?.Element(N.Party);
         if (party is null)
         {
             ctx.Report(RuleCatalog.PartyTaxId, (XObject?)wrapper ?? ctx.Root, role,
@@ -28,9 +28,9 @@ internal static class PartyChecks
         }
 
         int vknCount = 0, tcknCount = 0;
-        foreach (var id in party.Elements(Ns.Cac + "PartyIdentification").Elements(Ns.Cbc + "ID"))
+        foreach (var id in party.Elements(N.PartyIdentification).Elements(N.ID))
         {
-            var scheme = (string?)id.Attribute("schemeID");
+            var scheme = (string?)id.Attribute(N.SchemeId);
             var value = id.Value.Trim();
             if (!ctx.CodeLists.Contains(CodeListSet.PartyIdentificationSchemes, scheme))
             {
@@ -78,15 +78,15 @@ internal static class PartyChecks
                     $"{vknCount} VKN and {tcknCount} TCKN found, exactly one is required"));
         }
 
-        if (vknCount > 0 && IsBlank(Text(party.Element(Ns.Cac + "PartyName"), Ns.Cbc + "Name")))
+        if (vknCount > 0 && IsBlank(Text(party.Element(N.PartyName), N.Name)))
         {
             ctx.Report(RuleCatalog.PartyName, party, role);
         }
 
         if (tcknCount > 0)
         {
-            var person = party.Element(Ns.Cac + "Person");
-            if (IsBlank(Text(person, Ns.Cbc + "FirstName")) || IsBlank(Text(person, Ns.Cbc + "FamilyName")))
+            var person = party.Element(N.Person);
+            if (IsBlank(Text(person, N.FirstName)) || IsBlank(Text(person, N.FamilyName)))
             {
                 ctx.Report(RuleCatalog.PartyPerson, (XObject?)person ?? party, role);
             }

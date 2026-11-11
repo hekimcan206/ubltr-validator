@@ -21,7 +21,7 @@ internal static partial class TotalsChecks
     public static void Run(InvoiceContext ctx)
     {
         var root = ctx.Root;
-        var lmt = root.Element(Ns.Cac + "LegalMonetaryTotal");
+        var lmt = root.Element(N.LegalMonetaryTotal);
 
         CheckFormats(ctx, lmt);
 
@@ -29,7 +29,7 @@ internal static partial class TotalsChecks
         var linesComplete = true;
         foreach (var line in ctx.Lines)
         {
-            var extEl = line.Element(Ns.Cbc + "LineExtensionAmount");
+            var extEl = line.Element(N.LineExtensionAmount);
             var ext = Amount(extEl);
             if (ext is null)
             {
@@ -46,16 +46,16 @@ internal static partial class TotalsChecks
             return;
         }
 
-        var lineExtEl = lmt.Element(Ns.Cbc + "LineExtensionAmount");
+        var lineExtEl = lmt.Element(N.LineExtensionAmount);
         var lineExt = Amount(lineExtEl);
         if (linesComplete && lineExt is { } declaredLines && Math.Abs(declaredLines - lineSum) > ctx.Tolerance)
         {
             ctx.Report(RuleCatalog.LineTotal, lineExtEl, Show(declaredLines), Show(lineSum));
         }
 
-        var allowance = Amount(lmt.Element(Ns.Cbc + "AllowanceTotalAmount")) ?? 0m;
-        var charge = Amount(lmt.Element(Ns.Cbc + "ChargeTotalAmount")) ?? 0m;
-        var exclusiveEl = lmt.Element(Ns.Cbc + "TaxExclusiveAmount");
+        var allowance = Amount(lmt.Element(N.AllowanceTotalAmount)) ?? 0m;
+        var charge = Amount(lmt.Element(N.ChargeTotalAmount)) ?? 0m;
+        var exclusiveEl = lmt.Element(N.TaxExclusiveAmount);
         var exclusive = Amount(exclusiveEl);
         if (lineExt is { } le && exclusive is { } ex && Math.Abs(ex - (le - allowance + charge)) > ctx.Tolerance)
         {
@@ -63,20 +63,20 @@ internal static partial class TotalsChecks
         }
 
         // Taxes added to the price: every document-level TaxSubtotal. The withheld part is deducted only from the payable amount.
-        var taxes = root.Elements(Ns.Cac + "TaxTotal").Elements(Ns.Cac + "TaxSubtotal")
+        var taxes = root.Elements(N.TaxTotal).Elements(N.TaxSubtotal)
             .Select(ChargedTax).Sum();
-        var inclusiveEl = lmt.Element(Ns.Cbc + "TaxInclusiveAmount");
+        var inclusiveEl = lmt.Element(N.TaxInclusiveAmount);
         var inclusive = Amount(inclusiveEl);
         if (exclusive is { } exc && inclusive is { } inc && Math.Abs(inc - (exc + taxes)) > ctx.Tolerance)
         {
             ctx.Report(RuleCatalog.TaxInclusive, inclusiveEl, Show(inc), Show(exc + taxes));
         }
 
-        var prepaid = Amount(lmt.Element(Ns.Cbc + "PrepaidAmount")) ?? 0m;
-        var rounding = Amount(lmt.Element(Ns.Cbc + "PayableRoundingAmount")) ?? 0m;
-        var withheld = root.Elements(Ns.Cac + "WithholdingTaxTotal")
-            .Select(w => Amount(w.Element(Ns.Cbc + "TaxAmount")) ?? 0m).Sum();
-        var payableEl = lmt.Element(Ns.Cbc + "PayableAmount");
+        var prepaid = Amount(lmt.Element(N.PrepaidAmount)) ?? 0m;
+        var rounding = Amount(lmt.Element(N.PayableRoundingAmount)) ?? 0m;
+        var withheld = root.Elements(N.WithholdingTaxTotal)
+            .Select(w => Amount(w.Element(N.TaxAmount)) ?? 0m).Sum();
+        var payableEl = lmt.Element(N.PayableAmount);
         if (inclusive is { } incl && Amount(payableEl) is { } payable)
         {
             var expected = incl - prepaid + rounding - withheld;
@@ -89,30 +89,30 @@ internal static partial class TotalsChecks
 
     private static void CheckLine(InvoiceContext ctx, XElement line, XElement extEl, decimal declared)
     {
-        var quantity = Amount(line.Element(Ns.Cbc + "InvoicedQuantity"));
-        var price = line.Element(Ns.Cac + "Price");
-        var priceAmount = Amount(price?.Element(Ns.Cbc + "PriceAmount"));
+        var quantity = Amount(line.Element(N.InvoicedQuantity));
+        var price = line.Element(N.Price);
+        var priceAmount = Amount(price?.Element(N.PriceAmount));
         if (quantity is null || priceAmount is null)
         {
             return;
         }
 
         // UBL: PriceAmount is the price of BaseQuantity units (1 when absent).
-        var baseQuantity = Amount(price!.Element(Ns.Cbc + "BaseQuantity"));
+        var baseQuantity = Amount(price!.Element(N.BaseQuantity));
         var gross = quantity.Value * priceAmount.Value / (baseQuantity is > 0m ? baseQuantity.Value : 1m);
 
         var adjustments = 0m;
-        foreach (var ac in line.Elements(Ns.Cac + "AllowanceCharge"))
+        foreach (var ac in line.Elements(N.AllowanceCharge))
         {
-            var amount = Amount(ac.Element(Ns.Cbc + "Amount")) ?? 0m;
-            var isCharge = Text(ac, Ns.Cbc + "ChargeIndicator") is "true" or "1";
+            var amount = Amount(ac.Element(N.Amount)) ?? 0m;
+            var isCharge = Text(ac, N.ChargeIndicator) is "true" or "1";
             adjustments += isCharge ? amount : -amount;
         }
 
         var expected = Round2(gross + adjustments);
         if (Math.Abs(declared - expected) > ctx.Tolerance)
         {
-            ctx.Report(RuleCatalog.LineAmount, extEl, Text(line, Ns.Cbc + "ID"), Show(declared), Show(expected));
+            ctx.Report(RuleCatalog.LineAmount, extEl, Text(line, N.ID), Show(declared), Show(expected));
         }
     }
 
@@ -130,7 +130,7 @@ internal static partial class TotalsChecks
             }
         }
 
-        foreach (var taxAmount in ctx.Root.Elements(Ns.Cac + "TaxTotal").Elements(Ns.Cbc + "TaxAmount"))
+        foreach (var taxAmount in ctx.Root.Elements(N.TaxTotal).Elements(N.TaxAmount))
         {
             if (!AmountPattern().IsMatch(taxAmount.Value))
             {

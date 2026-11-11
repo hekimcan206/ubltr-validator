@@ -37,13 +37,13 @@ internal static partial class CurrencyChecks
             return;
         }
 
-        var exchange = root.Element(Ns.Cac + "PricingExchangeRate");
-        var rateEl = exchange?.Element(Ns.Cbc + "CalculationRate");
+        var exchange = root.Element(N.PricingExchangeRate);
+        var rateEl = exchange?.Element(N.CalculationRate);
         if (currency != "TRY")
         {
             if (rateEl is null)
             {
-                ctx.Report(RuleCatalog.ExchangeRateRequired, root.Element(Ns.Cbc + "DocumentCurrencyCode"), currency);
+                ctx.Report(RuleCatalog.ExchangeRateRequired, root.Element(N.DocumentCurrencyCode), currency);
             }
             else if (!RatePattern().IsMatch(rateEl.Value) || Amount(rateEl) is not > 0m)
             {
@@ -52,8 +52,8 @@ internal static partial class CurrencyChecks
 
             if (exchange is not null)
             {
-                var source = Text(exchange, Ns.Cbc + "SourceCurrencyCode");
-                var target = Text(exchange, Ns.Cbc + "TargetCurrencyCode");
+                var source = Text(exchange, N.SourceCurrencyCode);
+                var target = Text(exchange, N.TargetCurrencyCode);
                 if (source != currency || target != "TRY")
                 {
                     ctx.Report(RuleCatalog.ExchangeRateCurrencies, exchange, source, target, currency);
@@ -64,7 +64,7 @@ internal static partial class CurrencyChecks
         // One pass over every amount. currencyID only appears on UBL AmountType elements.
         foreach (var amount in root.Descendants())
         {
-            var attr = amount.Attribute("currencyID");
+            var attr = amount.Attribute(N.CurrencyId);
             if (attr is not null && attr.Value != currency)
             {
                 ctx.Report(RuleCatalog.AmountCurrency, attr, Ns.Qualified(amount.Name), attr.Value, currency);

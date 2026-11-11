@@ -31,18 +31,18 @@ internal static partial class HeaderChecks
     public static void Run(InvoiceContext ctx)
     {
         var root = ctx.Root;
-        var profileEl = root.Element(Ns.Cbc + "ProfileID");
-        var typeEl = root.Element(Ns.Cbc + "InvoiceTypeCode");
+        var profileEl = root.Element(N.ProfileID);
+        var typeEl = root.Element(N.InvoiceTypeCode);
         var profile = ctx.ProfileId;
         var type = ctx.InvoiceTypeCode;
 
-        var version = root.Element(Ns.Cbc + "UBLVersionID");
+        var version = root.Element(N.UBLVersionID);
         if (version?.Value.Trim() != "2.1")
         {
             ctx.Report(RuleCatalog.UblVersion, (XObject?)version ?? root, version?.Value.Trim());
         }
 
-        var customization = root.Element(Ns.Cbc + "CustomizationID");
+        var customization = root.Element(N.CustomizationID);
         if (customization?.Value.Trim() is not ("TR1.2" or "TR1.2.1"))
         {
             ctx.Report(RuleCatalog.Customization, (XObject?)customization ?? root, customization?.Value.Trim());
@@ -63,7 +63,7 @@ internal static partial class HeaderChecks
         CheckProfileTypeCombinations(ctx, (XObject?)typeEl ?? root, profile, type);
         CheckIdentity(ctx);
 
-        var lineCount = root.Element(Ns.Cbc + "LineCountNumeric");
+        var lineCount = root.Element(N.LineCountNumeric);
         if (lineCount is not null && Amount(lineCount) is var declared && declared != ctx.Lines.Count)
         {
             ctx.Report(RuleCatalog.LineCount, lineCount, lineCount.Value.Trim(), ctx.Lines.Count);
@@ -71,9 +71,9 @@ internal static partial class HeaderChecks
 
         if (type is not null && ReturnTypes.Contains(type))
         {
-            var refs = root.Elements(Ns.Cac + "BillingReference").Elements(Ns.Cac + "InvoiceDocumentReference").ToList();
+            var refs = root.Elements(N.BillingReference).Elements(N.InvoiceDocumentReference).ToList();
             var valid = refs.Count > 0 && refs.TrueForAll(r =>
-                Text(r, Ns.Cbc + "DocumentTypeCode") is "IADE" or "İADE" && (Text(r, Ns.Cbc + "ID") ?? "").Length == 16);
+                Text(r, N.DocumentTypeCode) is "IADE" or "İADE" && (Text(r, N.ID) ?? "").Length == 16);
             if (!valid)
             {
                 ctx.Report(RuleCatalog.ReturnReference, typeEl, type);
@@ -118,7 +118,7 @@ internal static partial class HeaderChecks
     private static void CheckIdentity(InvoiceContext ctx)
     {
         var root = ctx.Root;
-        var idEl = root.Element(Ns.Cbc + "ID");
+        var idEl = root.Element(N.ID);
         var id = idEl?.Value.Trim();
         var idValid = id is not null && InvoiceIdPattern().IsMatch(id);
         if (!idValid)
@@ -126,7 +126,7 @@ internal static partial class HeaderChecks
             ctx.Report(RuleCatalog.InvoiceIdFormat, (XObject?)idEl ?? root, id);
         }
 
-        var issueEl = root.Element(Ns.Cbc + "IssueDate");
+        var issueEl = root.Element(N.IssueDate);
         DateOnly? issueDate = DateOnly.TryParseExact(issueEl?.Value.Trim(), "yyyy-MM-dd", CultureInfo.InvariantCulture,
             DateTimeStyles.None, out var d) ? d : null;
 
@@ -149,14 +149,14 @@ internal static partial class HeaderChecks
             }
         }
 
-        var uuidEl = root.Element(Ns.Cbc + "UUID");
+        var uuidEl = root.Element(N.UUID);
         var uuid = uuidEl?.Value.Trim();
         if (uuid is null || !UuidPattern().IsMatch(uuid))
         {
             ctx.Report(RuleCatalog.UuidFormat, (XObject?)uuidEl ?? root, uuid);
         }
 
-        var copy = root.Element(Ns.Cbc + "CopyIndicator");
+        var copy = root.Element(N.CopyIndicator);
         if (copy?.Value.Trim() != "false")
         {
             ctx.Report(RuleCatalog.CopyIndicator, (XObject?)copy ?? root, copy?.Value.Trim());

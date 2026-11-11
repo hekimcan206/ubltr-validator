@@ -19,11 +19,11 @@ public sealed class InvoiceContext
         CodeLists = codeLists;
         _findings = findings;
 
-        ProfileId = Text(root, Ns.Cbc + "ProfileID");
-        InvoiceTypeCode = Text(root, Ns.Cbc + "InvoiceTypeCode");
-        Currency = Text(root, Ns.Cbc + "DocumentCurrencyCode");
-        Lines = [.. root.Elements(Ns.Cac + "InvoiceLine")];
-        HasWithholding = root.Element(Ns.Cac + "WithholdingTaxTotal") is not null;
+        ProfileId = Text(root, N.ProfileID);
+        InvoiceTypeCode = Text(root, N.InvoiceTypeCode);
+        Currency = Text(root, N.DocumentCurrencyCode);
+        Lines = [.. root.Elements(N.InvoiceLine)];
+        HasWithholding = root.Element(N.WithholdingTaxTotal) is not null;
         Kind = options.Kind switch
         {
             DocumentKind.Auto => ProfileId == "EARSIVFATURA" ? DocumentKind.EArsiv : DocumentKind.EFatura,
@@ -81,7 +81,7 @@ public sealed class InvoiceContext
     /// such a subtotal still shows the computed amount but contributes nothing to the totals.
     /// </summary>
     public static decimal ChargedTax(XElement subtotal) =>
-        Amount(subtotal.Element(Ns.Cbc + "CalculationSequenceNumeric")) is < 0m ? 0m : Amount(subtotal.Element(Ns.Cbc + "TaxAmount")) ?? 0m;
+        Amount(subtotal.Element(N.CalculationSequenceNumeric)) is < 0m ? 0m : Amount(subtotal.Element(N.TaxAmount)) ?? 0m;
 
     public static decimal Round2(decimal value) => Math.Round(value, 2, MidpointRounding.AwayFromZero);
 

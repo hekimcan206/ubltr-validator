@@ -19,14 +19,14 @@ internal static class TaxChecks
     {
         var root = ctx.Root;
         var type = ctx.InvoiceTypeCode;
-        var documentTaxTotals = root.Elements(Ns.Cac + "TaxTotal").ToList();
-        var withheld = root.Elements(Ns.Cac + "WithholdingTaxTotal")
-            .Select(w => Amount(w.Element(Ns.Cbc + "TaxAmount")) ?? 0m).Sum();
+        var documentTaxTotals = root.Elements(N.TaxTotal).ToList();
+        var withheld = root.Elements(N.WithholdingTaxTotal)
+            .Select(w => Amount(w.Element(N.TaxAmount)) ?? 0m).Sum();
 
         foreach (var taxTotal in documentTaxTotals)
         {
             CheckTaxTotalSum(ctx, taxTotal, withheld);
-            foreach (var subtotal in taxTotal.Elements(Ns.Cac + "TaxSubtotal"))
+            foreach (var subtotal in taxTotal.Elements(N.TaxSubtotal))
             {
                 // Document subtotals aggregate one rounded tax per line, so they may drift by half a kuruş per line.
                 CheckSubtotal(ctx, subtotal, ctx.AggregateTolerance(ctx.Lines.Count), documentLevel: true);
@@ -35,18 +35,18 @@ internal static class TaxChecks
 
         foreach (var line in ctx.Lines)
         {
-            foreach (var lineTaxTotal in line.Elements(Ns.Cac + "TaxTotal"))
+            foreach (var lineTaxTotal in line.Elements(N.TaxTotal))
             {
                 CheckTaxTotalSum(ctx, lineTaxTotal,
-                    line.Elements(Ns.Cac + "WithholdingTaxTotal").Select(w => Amount(w.Element(Ns.Cbc + "TaxAmount")) ?? 0m).Sum());
+                    line.Elements(N.WithholdingTaxTotal).Select(w => Amount(w.Element(N.TaxAmount)) ?? 0m).Sum());
             }
 
-            foreach (var subtotal in line.Elements(Ns.Cac + "TaxTotal").Elements(Ns.Cac + "TaxSubtotal"))
+            foreach (var subtotal in line.Elements(N.TaxTotal).Elements(N.TaxSubtotal))
             {
                 CheckSubtotal(ctx, subtotal, ctx.Tolerance, documentLevel: false);
             }
 
-            foreach (var subtotal in line.Elements(Ns.Cac + "WithholdingTaxTotal").Elements(Ns.Cac + "TaxSubtotal"))
+            foreach (var subtotal in line.Elements(N.WithholdingTaxTotal).Elements(N.TaxSubtotal))
             {
                 CheckWithholdingSubtotal(ctx, subtotal);
             }
@@ -54,13 +54,13 @@ internal static class TaxChecks
 
         CheckBreakdown(ctx, documentTaxTotals);
 
-        var withholdingTotals = root.Elements(Ns.Cac + "WithholdingTaxTotal").ToList();
+        var withholdingTotals = root.Elements(N.WithholdingTaxTotal).ToList();
         if (withholdingTotals.Count > 0 && !WithholdingTypes.Contains(type))
         {
             ctx.Report(RuleCatalog.WithholdingType, withholdingTotals[0], type);
         }
 
-        foreach (var subtotal in withholdingTotals.Elements(Ns.Cac + "TaxSubtotal"))
+        foreach (var subtotal in withholdingTotals.Elements(N.TaxSubtotal))
         {
             CheckWithholdingSubtotal(ctx, subtotal);
         }
@@ -68,13 +68,13 @@ internal static class TaxChecks
 
     private static void CheckTaxTotalSum(InvoiceContext ctx, XElement taxTotal, decimal withheld)
     {
-        var declaredEl = taxTotal.Element(Ns.Cbc + "TaxAmount");
+        var declaredEl = taxTotal.Element(N.TaxAmount);
         if (Amount(declaredEl) is not { } declared)
         {
             return;
         }
 
-        var sum = taxTotal.Elements(Ns.Cac + "TaxSubtotal").Select(ChargedTax).Sum();
+        var sum = taxTotal.Elements(N.TaxSubtotal).Select(ChargedTax).Sum();
         var matchesGross = Math.Abs(declared - sum) <= ctx.Tolerance;
         var matchesNet = withheld != 0m && Math.Abs(declared - (sum - withheld)) <= ctx.Tolerance;
         if (!matchesGross && !matchesNet)
@@ -87,21 +87,21 @@ internal static class TaxChecks
 
     private static void CheckSubtotal(InvoiceContext ctx, XElement subtotal, decimal tolerance, bool documentLevel)
     {
-        var category = subtotal.Element(Ns.Cac + "TaxCategory");
-        var codeEl = category?.Element(Ns.Cac + "TaxScheme")?.Element(Ns.Cbc + "TaxTypeCode");
+        var category = subtotal.Element(N.TaxCategory);
+        var codeEl = category?.Element(N.TaxScheme)?.Element(N.TaxTypeCode);
         var code = codeEl?.Value.Trim();
         if (codeEl is not null && !ctx.CodeLists.Contains(CodeListSet.TaxTypes, code))
         {
             ctx.Report(RuleCatalog.TaxTypeCode, codeEl, code);
         }
 
-        var taxAmountEl = subtotal.Element(Ns.Cbc + "TaxAmount");
+        var taxAmountEl = subtotal.Element(N.TaxAmount);
         var taxAmount = Amount(taxAmountEl);
-        var taxable = Amount(subtotal.Element(Ns.Cbc + "TaxableAmount"));
-        var percent = Amount(subtotal.Element(Ns.Cbc + "Percent"));
+        var taxable = Amount(subtotal.Element(N.TaxableAmount));
+        var percent = Amount(subtotal.Element(N.Percent));
 
         // Per-unit taxes (some SCT/ÖTV lists) are not a percentage of the base, so the rate check does not apply.
-        if (taxAmount is { } t && taxable is { } b && percent is { } p && subtotal.Element(Ns.Cbc + "PerUnitAmount") is null)
+        if (taxAmount is { } t && taxable is { } b && percent is { } p && subtotal.Element(N.PerUnitAmount) is null)
         {
             var expected = Round2(b * p / 100m);
             if (Math.Abs(t - expected) > tolerance)
@@ -117,7 +117,7 @@ internal static class TaxChecks
 
         var type = ctx.InvoiceTypeCode;
         if (code == Vat && taxAmount == 0m && !ZeroVatExemptTypes.Contains(type)
-            && IsBlank(Text(category, Ns.Cbc + "TaxExemptionReason")))
+            && IsBlank(Text(category, N.TaxExemptionReason)))
         {
             ctx.Report(RuleCatalog.ZeroVatReason, category, type);
         }
@@ -132,11 +132,11 @@ internal static class TaxChecks
 
     private static void CheckExemption(InvoiceContext ctx, XElement category, string? type)
     {
-        var codeEl = category.Element(Ns.Cbc + "TaxExemptionReasonCode");
+        var codeEl = category.Element(N.TaxExemptionReasonCode);
         var code = codeEl?.Value.Trim();
         var lists = ctx.CodeLists;
 
-        if (category.Element(Ns.Cbc + "TaxExemptionReason") is not null)
+        if (category.Element(N.TaxExemptionReason) is not null)
         {
             var investment = lists.Contains(CodeListSet.InvestmentIncentiveExemptionCodes, code)
                              && (ctx.ProfileId == "YATIRIMTESVIK" || lists.Contains(CodeListSet.InvestmentIncentiveEArchiveTypes, type));
@@ -173,10 +173,10 @@ internal static class TaxChecks
 
     private static void CheckWithholdingSubtotal(InvoiceContext ctx, XElement subtotal)
     {
-        var codeEl = subtotal.Element(Ns.Cac + "TaxCategory")?.Element(Ns.Cac + "TaxScheme")?.Element(Ns.Cbc + "TaxTypeCode");
+        var codeEl = subtotal.Element(N.TaxCategory)?.Element(N.TaxScheme)?.Element(N.TaxTypeCode);
         var code = codeEl?.Value.Trim() ?? "";
         // GIB concatenates the raw texts (code + percent), so "70.00" is not "70"; this mirrors that on purpose.
-        var percent = Text(subtotal, Ns.Cbc + "Percent") ?? "";
+        var percent = Text(subtotal, N.Percent) ?? "";
         if (code.Length == 0 || percent.Length == 0
             || !ctx.CodeLists.Contains(CodeListSet.WithholdingTaxTypes, code)
             || !ctx.CodeLists.Contains(CodeListSet.WithholdingTaxTypesWithPercent, code + percent))
@@ -191,13 +191,13 @@ internal static class TaxChecks
     /// </summary>
     private static void CheckBreakdown(InvoiceContext ctx, List<XElement> documentTaxTotals)
     {
-        if (ctx.Lines.Count == 0 || documentTaxTotals.Count == 0 || ctx.Lines.Any(l => l.Element(Ns.Cac + "TaxTotal") is null))
+        if (ctx.Lines.Count == 0 || documentTaxTotals.Count == 0 || ctx.Lines.Any(l => l.Element(N.TaxTotal) is null))
         {
             return;
         }
 
         var lineTotals = new Dictionary<(string Code, decimal Percent), (decimal Tax, int Parts)>();
-        foreach (var subtotal in ctx.Lines.SelectMany(l => l.Elements(Ns.Cac + "TaxTotal").Elements(Ns.Cac + "TaxSubtotal")))
+        foreach (var subtotal in ctx.Lines.SelectMany(l => l.Elements(N.TaxTotal).Elements(N.TaxSubtotal)))
         {
             var key = Key(subtotal);
             lineTotals.TryGetValue(key, out var acc);
@@ -205,7 +205,7 @@ internal static class TaxChecks
         }
 
         var documentTotals = new Dictionary<(string Code, decimal Percent), (decimal Tax, XElement Node)>();
-        foreach (var subtotal in documentTaxTotals.Elements(Ns.Cac + "TaxSubtotal"))
+        foreach (var subtotal in documentTaxTotals.Elements(N.TaxSubtotal))
         {
             var key = Key(subtotal);
             documentTotals.TryGetValue(key, out var acc);
@@ -225,6 +225,6 @@ internal static class TaxChecks
     }
 
     private static (string Code, decimal Percent) Key(XElement subtotal) => (
-        subtotal.Element(Ns.Cac + "TaxCategory")?.Element(Ns.Cac + "TaxScheme")?.Element(Ns.Cbc + "TaxTypeCode")?.Value.Trim() ?? "",
-        Amount(subtotal.Element(Ns.Cbc + "Percent")) ?? 0m);
+        subtotal.Element(N.TaxCategory)?.Element(N.TaxScheme)?.Element(N.TaxTypeCode)?.Value.Trim() ?? "",
+        Amount(subtotal.Element(N.Percent)) ?? 0m);
 }
