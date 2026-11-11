@@ -1,0 +1,84 @@
+name: "UBL-TR validator (e-Fatura / e-Arşiv)"
+description: "Validates UBL-TR invoice XML files against the GIB XSDs and business rules, with Turkish or English explanations as inline annotations."
+author: "hekimcan206"
+branding:
+  icon: "check-square"
+  color: "red"
+
+inputs:
+  paths:
+    description: "Files, directories or glob patterns to validate (newline or comma separated), relative to the workspace."
+    required: false
+    default: "**/*.xml"
+  lang:
+    description: "Language of the annotations: tr or en."
+    required: false
+    default: "tr"
+  kind:
+    description: "auto (decided by ProfileID), efatura or earsiv."
+    required: false
+    default: "auto"
+  fail-on:
+    description: "error (default) or warning."
+    required: false
+    default: "error"
+  disable:
+    description: "Space-separated rule ids to suppress, e.g. 'PTY-003 HDR-011'."
+    required: false
+    default: ""
+
+outputs:
+  valid:
+    description: "true when every file passed."
+    value: ${{ steps.validate.outputs.valid }}
+  report:
+    description: "Path of the JSON report (one entry per file)."
+    value: ${{ steps.validate.outputs.report }}
+
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-dotnet@v6
+      with:
+        global-json-file: ${{ github.action_path }}/global.json
+
+    # The GIB packages are downloaded during the build (they are not redistributable, so they are not in the repo).
+    # Caching them keeps the action fast and spares ebelge.gib.gov.tr a download per run.
+    - uses: actions/cache@v6
+      with:
+        path: ${{ github.action_path }}/.gib
+        key: ubltr-gib-${{ hashFiles(format('{0}/build/GibPackages.targets', github.action_path)) }}
+
+    - name: Build ubltr
+      shell: bash
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+        DOTNET_NOLOGO: "true"
+        DOTNET_CLI_TELEMETRY_OPTOUT: "true"
+      run: dotnet publish "$ACTION_PATH/src/UblTr.Cli/UblTr.Cli.csproj" -c Release -o "$RUNNER_TEMP/ubltr" --nologo -v quiet
+
+    # Inputs reach the script only through environment variables, never through ${{ }} interpolation inside
+    # the script body, so a crafted input cannot inject shell commands.
+    - name: Validate
+      id: validate
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      env:
+        UBLTR_PATHS: ${{ inputs.paths }}
+        UBLTR_LANG: ${{ inputs.lang }}
+        UBLTR_KIND: ${{ inputs.kind }}
+        UBLTR_FAIL_ON: ${{ inputs.fail-on }}
+        UBLTR_DISABLE: ${{ inputs.disable }}
+      run: |
+        set +e
+        report="$RUNNER_TEMP/ubltr-report.json"
+        args=(validate "$UBLTR_PATHS" --format github --lang "$UBLTR_LANG" --kind "$UBLTR_KIND" --fail-on "$UBLTR_FAIL_ON" --output-json "$report")
+        if [ -n "$UBLTR_DISABLE" ]; then
+          read -r -a disabled <<< "$UBLTR_DISABLE"
+          args+=(--disable "${disabled[@]}")
+        fi
+        dotnet "$RUNNER_TEMP/ubltr/ubltr.dll" "${args[@]}"
+        code=$?
+        echo "report=$report" >> "$GITHUB_OUTPUT"
+        if [ "$code" -eq 0 ]; then echo "valid=true" >> "$GITHUB_OUTPUT"; else echo "valid=false" >> "$GITHUB_OUTPUT"; fi
+        exit "$code"

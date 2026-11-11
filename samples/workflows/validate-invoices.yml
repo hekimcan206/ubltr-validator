@@ -1,0 +1,40 @@
+# Copy to .github/workflows/ in a repository that keeps UBL-TR invoices (fixtures, exports, integration test data).
+# Every finding becomes an inline annotation on the pull request, in Turkish (lang: tr) or English (lang: en).
+name: validate e-invoices
+
+on:
+  pull_request:
+    paths: ["invoices/**/*.xml"]
+  push:
+    branches: [main]
+    paths: ["invoices/**/*.xml"]
+
+permissions:
+  contents: read
+
+jobs:
+  ubltr:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Validate UBL-TR invoices
+        id: ubltr
+        uses: hekimcan206/ubltr-validator@v1
+        with:
+          paths: |
+            invoices/**/*.xml
+          lang: tr
+          kind: auto
+          fail-on: error
+          # Test fixtures often use placeholder tax numbers; suppress the checksum rule there if needed:
+          # disable: PTY-003
+
+      - name: Keep the JSON report
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ubltr-report
+          path: ${{ steps.ubltr.outputs.report }}
+          retention-days: 14
