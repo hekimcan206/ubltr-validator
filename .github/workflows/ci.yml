@@ -1,0 +1,194 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  NUGET_PACKAGES: ${{ github.workspace }}/.nuget/packages
+
+jobs:
+  build-test:
+    name: build & test
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-dotnet@v6
+        with:
+          global-json-file: global.json
+
+      - uses: actions/cache@v6
+        with:
+          path: ${{ env.NUGET_PACKAGES }}
+          key: nuget-${{ runner.os }}-${{ hashFiles('Directory.Packages.props', '**/*.csproj', 'global.json') }}
+          restore-keys: nuget-${{ runner.os }}-
+
+      # The GIB packages are fetched by the build (not redistributable, so not committed). The cache key is the
+      # targets file that pins their URLs and SHA-256 hashes, so a pin change downloads the new files.
+      - uses: actions/cache@v6
+        with:
+          path: .gib
+          key: gib-${{ hashFiles('build/GibPackages.targets') }}
+
+      - name: Restore
+        run: dotnet restore
+
+      # Package versions are pinned and updated by hand, so a known vulnerability in any direct or
+      # transitive package fails the build. Fix it with a pinned upgrade in Directory.Packages.props.
+      - name: Audit for vulnerable packages
+        run: |
+          set -o pipefail
+          dotnet list package --vulnerable --include-transitive 2>&1 | tee vulnerable-packages.txt
+          if grep -q "has the following vulnerable packages" vulnerable-packages.txt; then
+            echo "::error::Known-vulnerable NuGet packages found (see the list above)"
+            exit 1
+          fi
+
+      - name: Format check
+        run: dotnet format --verify-no-changes --no-restore
+
+      - name: Build (warnings are errors)
+        run: dotnet build --no-restore --configuration Release
+
+      # Unit, property, golden, CLI and in-process API tests. The golden suite also runs GIB's own sample
+      # invoices from the fetched package and pins the findings.
+      - name: Test
+        run: >
+          dotnet test --no-build --configuration Release
+          --coverage --coverage-output-format cobertura
+          --results-directory "${{ github.workspace }}/TestResults"
+
+      - name: Coverage summary
+        if: always()
+        uses: danielpalme/ReportGenerator-GitHub-Action@5.5.12
+        with:
+          reports: TestResults/**/*.cobertura.xml
+          targetdir: coverage
+          reporttypes: MarkdownSummaryGithub
+          assemblyfilters: "-*Tests*;-UblTr.Benchmarks;-UblTr.SampleGen"
+          filefilters: "-*/obj/*"
+
+      - name: Publish coverage to job summary
+        if: always()
+        run: |
+          if [ -f coverage/SummaryGithub.md ]; then
+            cat coverage/SummaryGithub.md >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "No coverage report produced."
+          fi
+
+      - name: Samples are what the generator produces
+        run: |
+          dotnet run --project tools/UblTr.SampleGen --no-build --configuration Release -- samples samples/invoices
+          git diff --exit-code -- samples/invoices
+
+      - uses: actions/upload-artifact@v7
+        if: failure()
+        with:
+          name: test-results
+          path: TestResults/
+          retention-days: 7
+
+  # The composite action at the repository root, used exactly as a consumer would use it (uses: ./).
+  action-selftest:
+    name: github action self-test
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Valid samples pass
+        id: valid
+        uses: ./
+        with:
+          paths: samples/invoices/valid
+
+      - name: Invalid samples fail with annotations (English, warnings fail too)
+        id: invalid
+        continue-on-error: true
+        uses: ./
+        with:
+          paths: |
+            samples/invoices/invalid/TOT-*.xml
+            samples/invoices/invalid/HDR-011.xml
+          lang: en
+          fail-on: warning
+
+      - name: Suppressed rules pass
+        id: suppressed
+        uses: ./
+        with:
+          paths: samples/invoices/invalid/PTY-003.xml
+          disable: PTY-003
+
+      - name: Assert outcomes
+        env:
+          VALID_OUT: ${{ steps.valid.outputs.valid }}
+          INVALID_OUTCOME: ${{ steps.invalid.outcome }}
+          INVALID_OUT: ${{ steps.invalid.outputs.valid }}
+          INVALID_REPORT: ${{ steps.invalid.outputs.report }}
+          SUPPRESSED_OUT: ${{ steps.suppressed.outputs.valid }}
+        run: |
+          test "$VALID_OUT" = "true"
+          test "$INVALID_OUTCOME" = "failure"
+          test "$INVALID_OUT" = "false"
+          test "$SUPPRESSED_OUT" = "true"
+          # 6 totals samples + the HDR-011 warning sample, each reported with its own rule id.
+          test "$(grep -o '"ruleId": "TOT-00[1-6]"' "$INVALID_REPORT" | sort -u | wc -l)" = "6"
+          grep -q '"ruleId": "HDR-011"' "$INVALID_REPORT"
+
+  compose-demo:
+    name: docker compose demo
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v7
+
+      # The README promises `docker compose up` runs the demo with zero manual steps; this job keeps it true.
+      - name: Start the stack
+        run: docker compose up -d --build
+
+      - name: The image runs as non-root
+        run: |
+          user=$(docker image inspect ubltr-validator:local --format '{{.Config.User}}')
+          echo "user: ${user}"
+          test -n "${user}" && test "${user}" != "0" && test "${user}" != "root"
+
+      - name: The API validates a valid and an invalid invoice
+        run: |
+          for i in $(seq 1 60); do
+            curl -fsS http://127.0.0.1:58380/health/ready && break
+            sleep 1
+          done
+          curl -fsS -X POST -H 'Content-Type: application/xml' --data-binary @samples/invoices/valid/ticari-satis-usd.xml \
+            http://127.0.0.1:58380/api/v1/validate | tee valid.json
+          grep -q '"valid":true' valid.json
+          curl -fsS -X POST -H 'Content-Type: application/xml' --data-binary @samples/invoices/invalid/TAX-004.xml \
+            'http://127.0.0.1:58380/api/v1/validate?lang=en' | tee invalid.json
+          grep -q '"valid":false' invalid.json
+          grep -q '"ruleId":"TAX-004"' invalid.json
+
+      - name: The CLI demo explains the findings in Turkish and exits 1
+        run: |
+          code=$(docker wait ubltr-validator-cli-demo-1)
+          docker compose logs --no-log-prefix cli-demo | tee cli.log
+          test "${code}" = "1"
+          grep -q "4 dosya: 1 geçerli, 3 geçersiz" cli.log
+          grep -q "Çözüm:" cli.log
+
+      - name: Logs on failure
+        if: failure()
+        run: docker compose logs
