@@ -3,6 +3,9 @@
     <Project Path="src/UblTr.Cli/UblTr.Cli.csproj" />
     <Project Path="src/UblTr.Validator/UblTr.Validator.csproj" />
   </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/UblTr.Tests/UblTr.Tests.csproj" />
+  </Folder>
   <Folder Name="/tools/">
     <Project Path="tools/UblTr.SampleGen/UblTr.SampleGen.csproj" />
   </Folder>
