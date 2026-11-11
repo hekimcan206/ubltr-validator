@@ -44,10 +44,18 @@ runs:
 
     # The GIB packages are downloaded during the build (they are not redistributable, so they are not in the repo).
     # Caching them keeps the action fast and spares ebelge.gib.gov.tr a download per run.
+    # hashFiles() only sees the workspace, and the action may live outside it, so the key is computed here.
+    - name: GIB cache key
+      id: gibkey
+      shell: bash
+      env:
+        ACTION_PATH: ${{ github.action_path }}
+      run: echo "key=ubltr-gib-$( (sha256sum "$ACTION_PATH/build/GibPackages.targets" 2>/dev/null || shasum -a 256 "$ACTION_PATH/build/GibPackages.targets") | cut -c1-16)" >> "$GITHUB_OUTPUT"
+
     - uses: actions/cache@v6
       with:
         path: ${{ github.action_path }}/.gib
-        key: ubltr-gib-${{ hashFiles(format('{0}/build/GibPackages.targets', github.action_path)) }}
+        key: ${{ steps.gibkey.outputs.key }}
 
     - name: Build ubltr
       shell: bash
